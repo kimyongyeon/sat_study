@@ -1,0 +1,25 @@
+{
+  "name": "sat_study",
+  "version": "1.0.0",
+  "description": "study ...",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kimyongyeon/sat_study.git"
+  },
+  "author": "tonyspark",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kimyongyeon/sat_study/issues"
+  },
+  "homepage": "https://github.com/kimyongyeon/sat_study#readme",
+  "dependencies": {
+    "express": "^4.16.3"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0"
+  }
+}

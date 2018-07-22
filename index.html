@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <style>
+        table tr td{
+            border: 1px solid red;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="content-wrapper">
+        <div id="header">
+            <div id="menu"></div>
+            <div id="login"></div>
+        </div>
+        <div id="content">
+            <div id="side"></div>
+            <div id="rightContent"></div>
+        </div>
+        <div id="footer"></div>
+    </div>
+    
+    <!-- root elements -->
+    <div id="content">
+        <h1>about</h1>
+        <table style="border:1px solid black;">
+            <tr onclick=fnClick();>
+                <td>이름</td>
+                <td id="myName"></td>
+            </tr>
+            <tbody id="htmlBody"></tbody>
+       </table>
+    </div>
+    <br>
+    <form id="form_data" action="">
+        이름 : <input id="in_name" type="text">
+        폰 : <input id="in_phone" type="text">
+        주소 : <input id="in_addr" type="text">
+        <button id="btnAdd" onclick="addOn(event);">추가</button>
+        <button id="btnEdit">수정</button>
+        <button id="btnRemove">삭제</button>
+        <input id="btnInit" type="button" value="초기화 ">
+        <input id="btnSend" type="submit" value="전송 ">
+    </form>
+    <table style="border:1px solid black;">
+        <thead>
+        <tr colspan="6">
+            <td>이름 </td>
+            <td id="td_name"></td>
+            <td>폰 </td>
+            <td id="td_phone"></td>
+            <td>주소 </td>
+            <td id="td_addr"></td>
+        </tr>
+        </thead>
+        <tbody id="tb_members">
+            
+        </tbody>
+    </table>
+
+</body>
+<script>
+    // 정적인 html, css
+    // 동적인 html, css, js
+
+    // CRUD
+    // C: create 생성
+    // R: read 읽기
+    // U: update 수정
+    // D: delete 삭제
+
+    // server : 
+        // - 등록 : insert => insName, insPhone
+        // - 수정 : update => upName, upPhone
+        // - 삭제 : delete => delName, delPhone
+        // - 읽기 : select => selName, selPhone
+    // front :
+        // - 등록 : regist => regName, regPhone
+        // - 수정 : edit => edName, edPhone
+        // - 삭제 : remove => reName, rePhone
+        // - 읽기 : read => reName, rePhone 
+        
+    // 상수
+    const IP = "123.123.123.123";
+    var memberNamePhoneAddr="";
+
+    var member = {
+        name: '철수',
+        phone: '12312312',
+        addr: '산'
+    }
+
+    // 이벤트 거는 방식 2가지 
+    // 1. jquery event listner 
+    // 2. onclick 함수
+    
+    $("#btnInit").on("click", function(e) {
+        alert("초기화 합니다.");
+        console.log("초기화");
+        $("#in_name").val('');
+        $("#in_phone").val('');
+        $("#in_addr").val('');
+    });
+
+    $("#btnRemove").on("click", function(e) {
+        e.preventDefault();
+        var list = $("input:checked");
+        list.each(function(i, d) {
+            var id = $(d).parent().parent().parent().parent().parent().attr("id");
+            $("#" + id).remove();
+        });
+    });
+
+    $("#btnSend").on("click", function(e) {
+        e.preventDefault();
+        alert("전송 합니다.");
+        // console.log("전송");
+
+        var name = $("#in_name").val();
+        var phone = $("#in_phone").val();
+        var addr = $("#in_addr").val();
+        var id = $("#in_name").attr("data-id");
+
+        console.log(`name:${name}, phone:${phone}, addr:${addr}`);
+
+        $("#td_name_" + id).text(name);
+        $("#td_phone_" + id).text(phone);
+        $("#td_addr_" + id).text(addr);
+
+    });
+
+    $("#btnEdit").on("click", function(e) {
+        e.preventDefault();
+        // alert("수정중 입니다.");
+        // console.log($("input[type=checkbox]"));
+        var list = $("input:checked");
+        if (list.length > 1) {
+            alert("하나 만 선택하고 수정 바랍니다.");
+            return;
+        }
+        list.each(function(i, d) {
+            // i : index
+            // d : data
+            // console.log(i, d); 
+            var id = $(d).parent().parent().parent().parent().parent().attr("id");
+            console.log(id);
+            var sel = $("#" + id);
+            var name = sel.find("#td_name_" + id).text();
+            var phone = sel.find("#td_phone_" + id).text();
+            var addr = sel.find("#td_addr_" + id).text();
+            console.log(name + phone + addr);
+            $("#in_name").val(name);
+            $("#in_phone").val(phone);
+            $("#in_addr").val(addr);
+            $("#in_name").attr("data-id", id);
+
+            // alert(id);
+
+        })
+    });
+
+    // $("#btnAdd").on("click", function(e){
+    //     alert("등록 입니다. ");
+    // })
+
+    function addOn(e) {
+        e.preventDefault();
+        // alert("onclick하셨습니다.");
+        var name = $("#in_name").val();
+        var phone = $("#in_phone").val();
+        var addr  = $("#in_addr").val();
+
+        if (name === "") {
+            alert("이름을 입력하세요.");
+            $("#in_name").focus();
+            return;
+        }
+        if (phone === "") {
+            alert("폰을 입력하세요.");
+            $("#in_phone").focus();
+            return;
+        }
+        if (addr === "") {
+            alert("주소을 입력하세요.");
+            $("#in_addr").focus();
+            return;
+        }
+        function guid() {
+            function s4() {
+            return ((1 + Math.random()) * 0x10000 | 0).toString(16).substring(1);
+            }
+            return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
+        }
+        var idx = guid();
+        var tbody = `
+            <div id=${idx}>
+                <table>
+                    <tr>
+                        <td><input id="in_chk_${idx}" type="checkbox"></td>
+                        <td>이름 </td>
+                        <td id="td_name_${idx}">${name}</td>
+                        <td>폰 </td>
+                        <td id="td_phone_${idx}">${phone}</td>
+                        <td>주소 </td>
+                        <td id="td_addr_${idx}">${addr}</td>
+                    </tr>
+                </table>
+            </div>
+        `;
+        // $("#tb_members").html(tbody);
+        $("#tb_members").append(tbody);
+    }
+
+    $("#td_name").text(member.name);
+    $("#td_phone").text(member.phone);
+    $("#td_addr").text(member.addr);
+
+    function fnClick() {
+        alert("클릭");
+    }
+
+    // $.ajax({
+    //     url: "http://localhost:3000/names",
+    // beforeSend: function( xhr ) {
+    //     xhr.overrideMimeType( "text/plain; charset=x-user-defined" );
+    // }})
+    // .done(function( data ) {
+    //     if ( console && console.log ) {
+    //         console.log(data);
+    //         $("body").html(data);
+    //     }
+    // });
+
+    var array = [];
+    array.push(1);
+    array.push(2);
+    array.push(3);
+
+    var htmlBody = "";
+    for(var i=0; i<array.length; i++) {
+        console.log("i ==> " + array[i]);
+        htmlBody += `
+            <tr><td>${i}번째 사람입니다.</td></tr>        
+        `
+    }
+
+    // var html = "<h1>제목</h1>";
+    // $("body").html(html);
+
+    $("#htmlBody").html(htmlBody);
+
+    // name, phone, addr
+    // $("#myName").text("영희");
+
+</script>
+</html>
