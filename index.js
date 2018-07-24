@@ -1,3 +1,5 @@
+// data ....
+
 console.log("hello javascript")
 
 // 함수 = 객체 
