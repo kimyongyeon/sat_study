@@ -1,7 +1,7 @@
-// data ....
+
 
 console.log("hello javascript")
-
+// 수정해본다.
 // 함수 = 객체 
 // 1000 -> 1,000
 // public, private, protected
