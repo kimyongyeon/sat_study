@@ -1,3 +1,8 @@
+<<<<<<< HEAD
+=======
+// 나는 충돌난다. 어떻게 할래?
+console.log("hello javascript")
+>>>>>>> abb164f71a66b7f3e05dab07cfd04f9c6e6ce2e3
 
 
 console.log("hello javascript")
