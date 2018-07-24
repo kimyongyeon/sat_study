@@ -1,3 +1,4 @@
+// 나는 충돌난다. 어떻게 할래?
 console.log("hello javascript")
 
 // 함수 = 객체 
