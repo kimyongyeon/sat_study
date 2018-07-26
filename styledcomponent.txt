@@ -1,0 +1,139 @@
+설치
+npm install --save styled-components
+
+cdn
+<script src="https://unpkg.com/styled-components/dist/styled-components.min.js"></script>
+
+bower
+bower install styled-components=https://unpkg.com/styled-components/dist/styled-components.min.js
+
+basic
+선언방법
+const Title = styled.h1`
+    font-size: 1.5em;
+    text-align: center;
+    color: palevioletred;
+`;
+
+body에 스타일을 주고 싶을때...
+import styled, {injectGlobal} from "styled-components";
+injectGlobal`
+  body {
+    padding: 0;
+    margin: 0;
+  }
+`
+
+만든 버튼을 상속받고 싶을때.
+const Button = styled.button`
+    border-radius: 50px;
+    padding: 5px;
+    min-width: 120px;
+    color: white;
+    font-weight: 600;
+    -webkit-appearance: none;
+    cursor: pointer;
+    &:active,
+    &:focus {
+      outline: none;
+    }
+    background-color: ${props => props.danger ? "#c0392b": "#2ecc71"};
+`;
+const Anchor = Button.withComponent('a');
+
+사용방법
+<Button>Hello </Button>
+<Button danger> Hello </Button>
+<Anchor href="http://www.google.com" target="_blank">Go to goole</Anchor>
+
+애니메이션
+import styled, { injectGlobal, keyframes } from "styled-components";
+const rotaion = keyframes`
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+`
+const Button = styled.button`
+    border-radius: 50px;
+    padding: 5px;
+    min-width: 120px;
+    color: white;
+    font-weight: 600;
+    -webkit-appearance: none;
+    cursor: pointer;
+    &:active,
+    &:focus {
+      outline: none;
+    }
+    background-color: ${props => props.danger ? "#c0392b" : "#2ecc71"};
+    ${props => {
+    if (props.danger) {
+      return `animation: ${rotaion} ${props.rotaionTime}s linear infinite`;
+    }
+  }}
+`;
+<Button danger rotaionTime={5}> Hello </Button>
+
+mixin : 공통 css를 빼고 싶을때, header, footer, card성 디자인이 필요할때 사용.
+import styled, { injectGlobal, keyframes, css } from "styled-components";
+
+const awesomeCard = css`
+  box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0,0,0,0.08);
+  background-color: white;
+  border-radius: 10px;
+  padding: 20px;
+`
+const Input = styled.input.attrs({
+  required: true
+}) `
+  ${awesomeCard};
+  border-radius: 5px;
+`
+theme
+import styled, { injectGlobal, keyframes, css, ThemeProvider } from "styled-components";
+import theme from './theme';
+
+theme.js
+const theme = {
+    mainColor: "#3498db",
+    dangerColor: "#c0392b",
+    successColor: "#27ae60"
+};
+export default theme;
+const Card = styled.div`
+  background-color: red;
+`;
+
+const Button = styled.button`
+  border-radius: 30px;
+  padding: 25px 15px;
+  background-color: ${props => props.theme.dangerColor};
+`;
+
+const Form = () => (
+  <Card>
+    <Button>Hello</Button>
+  </Card>
+)
+
+<ThemeProvider theme={theme}>
+   <Container>
+      <Form />
+   </Container>
+</ThemeProvider>
+
+유용한 components 사이트
+https://github.com/kimyongyeon/awesome-styled-components
+
+# 태블릿, 데스크탑
+https://github.com/jameslnewell/styled-components-breakpoint
+# flex
+https://github.com/SaraVieira/styled-flex-component
+# style reset 
+https://github.com/zacanger/styled-reset
+
+주의 : 
+에러는 안나지만 ; 이 빠지면 툴에서 색이 자연스럽지 못함. 꼭 스타일은 적고 ;은 입력하도록!
