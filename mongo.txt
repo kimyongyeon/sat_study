@@ -1,0 +1,43 @@
+서비스 등록방법 
+root@x8dev:/home/x8tech-games-java# cp src/main/resources/x8techMongkeyApp /etc/init.d/mong-server-app
+root@x8dev:/home/x8tech-games-java# vi /etc/init.d/mong-server-app
+
+권한
+sudo +x /etc/init.d/mong-server-app
+실행/중지/재시작
+sudo service mong-server-app start
+sudo service mong-server-app stop
+sudo service mong-server-app restart
+
+우분투 몽고DB 서버 설치
+// server
+mongod --version
+// client
+mongo --version
+// 설치
+apt-get install mongodb-clients mongodb-server
+// 확인
+mongo --version
+mongod --version
+netstat -ntlp | grep mongod
+mongo
+show dbs
+exit
+
+
+
+
+
+
+
+mongodb info
+mongoose.connect('mongodb://kimyongyeon:asdwsx12@ds145359.mlab.com:45359/gamehis');
+
+mariadb
+this.conn.connect({
+    host : 'kimyongyeon.c8kd9rejaiac.ap-northeast-2.rds.amazonaws.com'
+    , port : '3306'
+    , user : 'root'
+    , password : 'asdwsx12'
+    , db : 'mysql'
+});

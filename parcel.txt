@@ -1,0 +1,137 @@
+# 설치 순서
+글로벌 설치 : yarn global add parcel-bundler
+바벨 설치 : yarn add babel-preset-env babel-preset-react --dev
+
+react 일반 페이지 만들기  /src/app.js
+import React from "react";
+import styles from "./styles.scss";
+
+export default () => <div className={styles.title}>app.js called </div>
+                        
+
+시작페이지  index.js
+import React from "react";
+import ReactDOM from "react-dom";
+import App from "./src/App";
+
+ReactDOM.render(<App />, document.getElementById("app"));
+
+
+시작 html 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>Parcel Experiments</title>
+</head>
+<body>
+<div id="app"></div>
+<script src="./index.js"></script>
+</body>
+</html>
+
+
+바벨 설정
+.babelrc 파일 생성
+{
+"presets": [
+"env", "react"
+]
+}
+
+scss -> css 바꾸기
+styles.css 생성 
+import styles from "./styles.scss";
+post module을 빌드하기 우해서 설치 
+yarn add postcss-modules
+css 파일 -> scss 확장자로 변환 
+yarn global add node-sass
+yarn add autoprefixer
+.postcssrc
+{
+    "modules": true,
+    "plugins": {
+        "autoprefixer": {
+            "browsers": [
+                "> 1%",
+                "Last 2 versions",
+                "IE 10"
+            ]
+        }
+    }
+}
+
+typography 설치
+yarn add typography
+root 위치 : typography.js 파일생성
+typography.js 
+import Typography from "typography";
+
+const typography = new Typography({
+baseFontSize: "18px",
+baseLineHeight: 1.666,
+googleFonts: [
+{
+name: "Montserrat",
+styles: ["700"]
+},
+{
+name: "Open Sans",
+styles: ["400"]
+},
+],
+headerFontFamily: ["Montserrat", "Helvetica Neue", "sans-serif"],
+bodyFontFamily: ["Open Sans", "sans-serif"]
+});
+
+typography.injectStyles();
+
+export default typography;
+
+app.js 추가
+export default () => (
+<div className={styles.title}>
+<h1>Hello!</h1>
+<p> lorem ipsum</p>
+</div>
+)
+
+
+index.js 추가 
+import typography from "./typography";
+
+프로덕트 빌드
+package.json
+{
+"name": "parcel-experiments",
+"version": "1.0.0",
+"main": "index.js",
+"repository": "https://github.com/kimyongyeon/parcel-experiments",
+"author": "eves <evesjapan@gmail.com>",
+"license": "MIT",
+"dependencies": {
+"autoprefixer": "^8.2.0",
+"node-sass": "^4.8.3",
+"postcss-modules": "^1.1.0",
+"react": "^16.3.1",
+"react-dom": "16.3.1",
+"typography": "^0.16.6"
+},
+"devDependencies": {
+"babel-core": "^6.26.0",
+"babel-preset-env": "^1.6.1",
+"babel-preset-react": "^6.24.1"
+},
+"scripts": {
+"start": "parcel --port 3000 index.html",
+"build": "parcel build index.html -d build --public-url ./"
+}
+}
+
+
+중요한건 --public-url 이다. 
+amazon 같은경우 --public-url http://amazon.com
+javascript 파일 내에 script 임포트 앞에 자동으로 http://amazon.com/common.js 가 붙는다. 
+

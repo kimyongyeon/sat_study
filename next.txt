@@ -1,0 +1,53 @@
+mkdir hello-next
+cd hello-next
+yarn init -y
+yarn add react react-dom next
+mkdir pages
+
+vscode 설정 / emmet 사용이 가능하도록 설정.
+"emmet.syntaxProfiles": { "jsx": { "attr_quotes": "single" } },
+"emmet.includeLanguages": {
+"javascript": "javascriptreact",
+"vue-html": "html"
+}
+
+package.json 추가
+{
+
+"name": "hello-next",
+"version": "1.0.0",
+"license": "MIT",
+"scripts": {
+"dev": "next"
+},
+"dependencies": {
+"next": "^2.1.0",
+"react": "^15.4.2",
+"react-dom": "^15.4.2"
+}
+}
+
+pages / index.js 
+const Index = () => (
+
+<div>
+<h1>
+안녕, Next.js
+</h1>
+</div>
+);
+export default Index;
+
+실행
+yarn run dev
+
+ssr : server side rendering
+csr : client side rendering
+
+
+
+
+
+
+
+

@@ -1,0 +1,94 @@
+mariadb  가상서버 설치 방법
+sudo apt-get install python-software-properties
+sudo apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xcbcb082a1bb943db
+sudo add-apt-repository 'deb http://ftp.kaist.ac.kr/mariadb/repo/10.1/ubuntu lucid main'
+sudo apt-get update
+apt-get install mariadb-server
+
+mysql 설정 참고 사이트 : http://webdir.tistory.com/217
+재시작시 에러 로그 확인 위치 
+vi /var/log/mysql/error.log
+
+service mysql restart
+
+원격접속 허용
+에러증상
+Host '135.79.246.80' is not allowed to connect to this MySQL server
+
+mysql 접속 후
+mysql> SELECT Host,User,Password FROM mysql.user;
+
+모든 IP허용
+
+INSERT INTO mysql.user (host,user,password) VALUES ('%','root',password('패스워드'));
+GRANT ALL PRIVILEGES ON *.* TO 'root'@'%';
+FLUSH PRIVILEGES;
+
+특정 IP 대역 허용
+
+INSERT INTO mysql.user (host,user,password) VALUES ('111.222.%','root',password('패스워드'));
+GRANT ALL PRIVILEGES ON *.* TO 'root'@'111.222.%';
+FLUSH PRIVILEGES;
+
+특정 IP 1개 허용
+
+INSERT INTO mysql.user (host,user,password) VALUES ('111.222.33.44','root',password('패스워드'));
+GRANT ALL PRIVILEGES ON *.* TO 'root'@'111.222.33.44';
+FLUSH PRIVILEGES;
+
+원복
+
+DELETE FROM mysql.user WHERE Host='%' AND User='root';
+FLUSH PRIVILEGES;
+
+LISTEN IP 대역 변경
+
+netstat -ntlp | grep mysqld
+
+에러증상
+ERROR 1045 (28000): Access denied for user 'root'@'localhost' (using password: NO)
+-p 옵션을 붙여 패스워드를 입력하자.
+mysql -pP@ssw0rd
+패스워드 안맞음
+mysql -h135.79.246.80 -utestuser -phello
+패스워드 맞음
+mysql -h135.79.246.80 -utestuser -pP@ssw0rd
+
+
+설정파일 
+vi /etc/mysql/my.cnf
+
+utf8 설정
+[client]
+default-character-set = utf8
+[mysqld]
+character-set-client-handshake=FALSE
+init_connect="SET collation_connection = utf8_general_ci"
+init_connect="SET NAMES utf8"
+character-set-server = utf8
+collation-server = utf8_general_ci
+[mysqldump]
+default-character-set = utf8
+[mysql]
+default-character-set = utf8
+
+cafe24 같은경우 방어벽을 열어도 접속이 안되는경우
+bind-address x8dev.cafe24.com
+으로 변경해야 함. 이유는 가상 서버이기 때문에..
+이거 하기 전에 
+netstat -ano | grep 33
+쳤을때 
+127... 이걸로 시작하면 저기 변경하면 끝!
+
+방어벽 설정
+iptables -I INPUT -p tcp --dport 3306 -m state --state NEW,ESTABLISHED -j ACCEPT
+iptables -I OUTPUT -p tcp --sport 3306 -m state --state ESTABLISHED -j ACCEPT
+
+쿼리문용량 16 -> 256 증가 
+sudo vi /etc/mysql/my.cnf [mysqld] max_allowed_packet = 256M
+
+
+이미 깔린 상태면
+install mariadb-server-core-10.1
+$apt-get install mariadb-server-10.1
+$apt-get install mariadb-client-10.1
