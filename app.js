@@ -1,6 +1,10 @@
 var express = require('express');
 var app = express();
+<<<<<<< HEAD
 ////// 12122324234123123123123123
+=======
+//////////////////////////////////////////////////
+>>>>>>> st
 app.all('/*', function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "X-Requested-With");
