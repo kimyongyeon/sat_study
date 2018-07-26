@@ -1,0 +1,113 @@
+시작은 
+#!/bin/bash
+#!/bin/sh
+둘중 하나 쓰면 된다.
+
+변수: 변수명=값
+변수명과 값 사이를 반드시 붙여 써야 한다.
+
+변수 받기 
+read name
+
+출력
+echo "$name" 
+
+message="hello"
+echo "$message world"
+
+특수문자는 '\'(역슬러쉬) $ 를 이용하면 사용이 가능하다. 
+
+if문 사용방법
+if test "$message" = "Hello"; then
+    echo "Hello world"
+fi
+
+if [ "$message" = "Hello" ]; then
+    echo "Hello world"
+fi
+
+` 추천 방식
+if [[ $message == "Hello" ]]; then
+    echo "Hello world"
+fi
+
+[[<조건식>]] 문자열 비교 
+조건식
+설명
+문자열1==문자열2
+문자열이 일치
+문자열1!=문자열2
+문자열이 일치하지 않음
+-z 문자열
+빈문자열
+-n 문자열
+빈 문자열이 아님
+문자열==패턴
+문자열이 패턴에 매치
+문자열!=패턴
+문자열이 패턴에 매치하지 않음
+
+[[<조건식>]] 수치 비교
+
+조건식
+비교
+수치1 -eq 수치2
+수치가 같음
+수치1 -ne 수치2
+수치가 같지 않음
+수치1 -lt 수치2
+수치1이 수치2보다 작음
+수치1 -le 수치2
+수치1이 수치2보다 작거나 같음
+수치1 -gt 수치2
+수치1이 수치2보다 큼
+수치1 -ge 수치2
+수치1이 수치2보다 크거나 같음
+
+
+[[<조건식>]] 파일검사
+
+조건식
+설명
+-e 파일명
+파일이 존재함
+-d 파일명
+디렉토리
+-h 파일명
+실볼릭 링크
+-f 파일명
+일반 파일
+[[<조건식>]] 논리연산
+
+조건식
+설명
+조건1&&조건2
+양쪽다 성립
+조건1||조건2
+한쪽혹은양쪽다성립
+!조건
+조건이 성립하지 않음
+true
+조건이 언제나 성립
+false
+조건이 언제나 성립하지 않음
+무한루프 예제
+#!/bin/sh
+while [[ true ]]; do
+    sleep 60
+    echo "Hello world"
+done
+
+#!/bin/sh
+if grep "Hello" /tmp/tmp0 >/dev/null 2>&1; then
+    echo "Hello world"
+fi
+
+grep "Hello" /tmp/tmp0 >dev>null 2>&1; 
+rc=$?
+if [[ $rc -eq 0]]; then
+    echo "hello "
+fi
+
+$?: 명령어가 있다면 0 없으면 0이 아닌 수
+

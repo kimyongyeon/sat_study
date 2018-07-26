@@ -1,0 +1,76 @@
+터미널에서 아래와 같은 명령어를 입력합니다.
+xcode-select --install
+
+만일 설치가 되어있으면 에러가 발생합니다.
+xcode-select: error: command line tools are already installed, use "Software Update" to install updates
+
+그런 다음 brew를 설치하기 위해서 터미널에서 아래와 같이 입력합니다.
+ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+
+3. brew를 통한 패키지 관리
+기본적으로 brew를 통해서 관리되는 패키지들은 아래와 같은 경로에 설치가 됩니다,
+/usr/local/Cellar/패키지명/버젼명
+
+혹시 삭제후에 패키지가 완전히 삭제되지 않았을 경우에는 위 디렉토리경로를 참고삼아서 삭제하시면 됩니다
+
+3-1 패키지 추가
+이제 Brew를 통해서 원하는 패키지를 추가해보도록 하겠습니다.
+wget을 설치해보도록 하겠습니다.
+터미널에 아래와 같이 입력합니다.
+
+brew install wget
+
+그러면 추가적으로 필요한 라이브러리들과 함께 wget이 설치가 되는것을 보실수 있습니다.
+
+참고로 brew를 통해 설치가 가능한 패키지들은
+brew search 혹은 brew search | grep 패키지명
+을 통해 확인이 가능합니다.
+
+예를 들어 mysql이 설치가 가능한지 확인하려면
+brew search | grep mysql
+을 입력하시면 됩니다.
+
+3-2 패키지 제거
+반대로 패키지를 제거하려면  터미널에서 아래와 같이 입력합니다.
+brew remove 패키지명
+
+
+참고로 현재 시스템에 설치된 패키지들은
+brew list
+을 통해서 확인이 가능합니다.
+
+3-3 패키지 업그레이드
+이미 설치된 패키지를 업그레이드 하려면 아래와 같은 방법으로 하시면 됩니다.
+1) brew를 통해 설치된 모듈들을 한번에 모두 업데이트 하고 싶다면
+brew upgrade
+2) 특정 패키지만 업데이트 하고 싶다면
+brew update 패키지명
+
+3-4 패키지 구버젼 삭제
+brew remove 패키지명
+
+4. brew자체를 관리하기 위한 명령어들
+
+4-1 brew 자체 업데이트
+brew에 설치가 가능한 패키지의 목록을 업데이트 하거나 혹은 그외의 이유로 brew를 업데이트 해야 하는 경우가 있습니다.
+터미널에서 아래와 같이 입력하시면 됩니다.
+brew update
+
+4-2 brew에 설치된 모듈중 구버젼을 삭제하고 싶을때.
+brew를 통해 패키지 관리를 하다면 동일한 패키지들에 대한 버젼업등의 이슈로
+하나의 패키지에 여러가지 버젼이 설치되어있을수 있습니다.
+그리고 로그성데이터등 여러가지 쓸데없는 데이터가 쌓여있을수 있는데 아래와 같이 정리가 가능합니다.
+
+1) 전체 패키지를 한번에 정리하는 방법
+터미널에서 아래와 같이 입력합니다,
+brew cleanup
+
+2) 특정 패키지만 정리하는 방법
+터미널에서 아래와 같이 입력합니다.
+brew cleanup 패키지명
+
+brew 설치가 안될때...
+http://apple.stackexchange.com/questions/190169/how-to-upgrade-bash-with-brew-permission-error
+아래 명령어중 하나를 입력하여 제한을 풀어준다.
+sudo chown -R $USER:admin /usr/local
+sudo chown -R $USER:admin /Library/Caches/Homebrew

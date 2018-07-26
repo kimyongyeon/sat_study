@@ -1,0 +1,644 @@
+
+#리눅스 명령어 정리.
+
+
+원본 URL: https://www.facebook.com/permalink.php?story_fbid=903129106399000&id=100001057565546
+root 패스워드 권한
+sudo passwd root
+
+
+pkexec chmod 0440 /etc/sudoers
+
+
+1
+$ sudo visudo    : 루트권한 얻기.
+# User privilege specification
+root ALL=(ALL:ALL) ALL
+
+
+* LinuxUSB 마운트 
+1. usb 장치를 리눅스서버에 꼽는다.
+2. usb장치를 마운트할 마운트포인트를 생성한다.
+mkdir /mnt/usb
+3. modprobe명령어로 ide-scsi모듈을 로드한다.
+modprobe ide-scsi
+4. 어떤 장치명에 할당 되었는가를 확인하기 위하여
+fdisk -l
+5. usb장치가 /dev/sdc/ 장치를 사용하는 것을 확인했으므로, 해당 장치를 마운트한다.
+mount -t vfat /dev/sdc /mnt/usb
+6. 사용이 끝나면 마운트를 해제한다.
+umount /media/usb
+7. usb드라이브에서 한글 깨짐 현상 복구
+mount -t vfat -o iocharset=cp949 /dev/sda1/mnt/usb
+8. 부팅 시 자동으로 인식하기
+vi /etc/fstab /dev/sda1 /mnt/usb auto noauto, iocharset=cp949,user 0 0
+
+
+* CentOS버전확인
+lsb_release -a
+
+
+* tcpdump - 데이터패킷 캡쳐 및 모니터링
+1. tcpdump : 데이터 패킷을 캡쳐 할 수 있고 모니터링 할 수 있음.
+2. tcpdump [option] [target]
+tcpdump p -X -i eth0 udp port 9968
+3. 파일로 저장하기
+tcpdump p -s -i eth0 -w 파일명.cap
+- 캡쳐후 wireshark로 확인
+
+
+* 리눅스에서 하드디스크 mount하기
+리눅스에서 다른 파티션 하드디스크(디바이스) mount하기
+1. 디바이스 확인
+fdisk -l : 명령으로 현재 모든 디스크의 MBR에 저장되어 있는 파티션 설정 내용을 확인할 수 있다.
+-sda2 : 윈도우 파티션
+-sda3 : 데이터백업용 파티션
+-sda4 : 리눅스 파티션
+2. 디바이스 마운트
+mount -t [type] [dev] [dir]
+- [type] : 파일 시스템 도입
+- [dev] : 마운트 할 대상 디바이스
+- [dir] : 마운트하여 사용할 디렉토리 경로
+ex) sda3를 마운트 할때
+mount -t ntfs /dev/sda3/ /home/beloved/mnt/ : /home/beloved/mnt/ 폴더에 들어가면 데이터 백업용 파티션의 내용을 확인할 수 있다.
+3. 디바이스 언마운트
+unmount [dir]
+ex) sda3를 언마운트 할때
+umount /home/beloved/mnt/
+- unmount시 해당폴더에서 나와서 명령어 실행 해야함.
+
+* 리눅스 prompt / hostname 변경
+1. prompt 설정방법 : .bashrc파일을 수정하여 prompt를 변경한다.
+export PS1="[\u@\h:\W]\$" 추가
+- u : username 출력
+- h: hostname 출력
+- W : current directory 출력
+=> [root@beloved: ~]$
+2. hostname 변경
+/etc/hostname, /etc/hosts 파일수정
+- hostname 파일의 기존 hostname을 새로운 name으로 변경
+- hosts 파일의 2번째 라인의 기존 hostname을 새로운 name으로 변경
+- 시스템 재시작
+% hostname파일만 변경하고, hosts파일을 변경하지 않을 경우 ftp데몬 실행이 정상적으로 이루어 지지 않을 수 있으며,
+Fatal: error processing configuration file '/etc/proftpd/proftpd.conf 와 같은 오류 메시지를 출력할 수 있다.
+
+* 리눅스 계정 관리(adduser, usermod, userdel)
+1. 계정생성 : 사용자 계정을 새롭게 생성한다.
+명령어 adduser [계정명]
+- 패스워드 / 사용자 정보를 추가로 입력할 수 있다.
+2. 계정검색 : 생성된 계정에 대한 정보를 검색하고, 수정한다.
+/etc/passwd : 사용자 인증에 필요한 계정 정보
+cat /etc/passwd | grep beloved_test
+- beloved_test : 사용자계정
+- x : 비밀번호
+- 1002 : 사용자id(0:관리자, 1~499:시스템계정, 500~:일반사용자계정)
+- 1002 : 그룹ID
+- administrator : 계정정보(comment)
+- /home/beloved_test : 홈 디렉토리
+- /bin/sh : 로그인 쉘
+/etc/shadow : 사용자 인증에 필요한 암호 정보(암호화)
+- beloved_test(Login Name) : 사용자계정
+- $6$98WfRq5~(Encrypted) : 패스워드를 암호화 시킨값
+- 15394(Last changed) : 1970년 1월1일 부터 패스워드가 수정된 날짜의 일수를 계산
+- 0(Minimum) : 패스워드가 변경되기 전 최소사용기간
+- 99999(Maximum) : 패스워드 변경 전 최대 사용기간
+- 7(Warn) : 패스워드 사용 만기일 전에 경고 메시지를 제공하는 일 수
+- Inactive : 로그인 차단 일 수 (캡쳐화면에서는 설정되지 않음)
+- Expire : 로그인 사용을 금지하는 일 수(캡쳐 화면에서는 설정되지 않음.)
+- Reserved : 사용되지 않음.
+3. 계정수정 : 계정명을 받아 옵션에 적용된 값의 지정, 계정정보를 변경
+명령어 usermod [옵션] [계정명]
+옵션
+-c : 사용자이름, 정보수정
+-d : 사용자 계정 홈 디렉토리 위치 수정
+-e : 사용지 계정을 지정된 날짜에 삭제
+-f : 패스워드 만기된 후 계정 영구 삭제 기간
+-u : 사용자 ID 퍼미션
+-s : 사용자의 로그인 쉘 지정
+-G :사용자가 기본 그룹 이외, 다른 그룹에 추가.
+ex) 사용자 계정에 comment로 administrator라는 정보를 추가 : usermod -C administrator beloved_test
+ex) 사용자 계정에 expire day로 2012년 2월 25일을 설정 : usermod -e 20120225 beloved_test
+cat /etc/passwd | grep beloved_test
+4. 비밀번호 변경 : passwd [계정명]
+5. 계정삭제 : 생성했던 사용자 계정을 삭제
+명령어 userdel [옵션] [계정명]
+옵션
+-f(Force) : 파일이 소쥬가 아니더라도 강제로 삭제
+-h(Help) : 도움말
+-r(Remove) : 홈디렉토리와 메일 저장소 삭제(모든 계정관련 폴더 파일 삭제)
+5. 계정권한 수정
+설정파일 경로 /etc/adduser.conf
+6. DIR_MODE 수정(초기 755) : 750으로 수정시 이후 생성되는 계정은 750권한을 갖는다. (소유자:7/그룹:5/전체:0)
+따라서, root와 동일한 그룹을 제외한 타 계정의 접근을 거부할 수 있다.
+
+
+* chmod - 리눅스 파일 및 디렉토리 권한 관리
+1. 권한에 대한 관리 : 파일이나 디렉토리의 permition을 관리한다.
+명령어 : chmod [권한값] [파일명]
+권한값에 대한 정의 : ls -al 명령을 통해 파일/디렉토리의 권한을 확인할 수 있다.
+r: 읽기권한(4), w:쓰기권한(2), x:실행권한(1)
+- 10자리의 의미를 파악하기 위해 4파트로 나누어 해석
+- [디렉토리1자리][소유자권한3자리][그룹권한3자리][전체권한3자리]
+- 권한값 읽기 : [-rw-rw-r--] => 664로 읽을 수 있다. (r+w(6), r+w(6), r(4))
+2. 파일 권한 변경하기.
+chmod 명령을 이용해 파일의 권한을 변경
+ls -al
+chmod 750 test
+ls -al
+- test라는 디렉토리의 권한이 755에서 750로 변경
+- 소유자권한 : 읽기,쓰기,실행
+- 그룹권한 : 읽기,실행
+- 전체권한 : 없음
+=> root또는 동일그룹의 사용자를 제외하고는 디렉토리를 열 수 없다.
+디렉토리에대한 실행 권한은 디렉토리 오픈을 의미한다.
+
+* 리눅스 그룹관리(groupadd, groupmod, groupdel)
+1. 그룹생성 : 특정 폴더나 파일을 특정 권한이 있는 사용자들만이 함께 사용하기 위해, 해당 사용자들에게 권한을 부여하여 그룹 단위로 묶어 관리 할 수 있다.
+명령어
+addgroup [그룹명] (우분투)
+groupadd [옵션] [그룹명]
+옵션
+-g : 그룹 id지정
+addgroup coffee
+cat /etc/group | grep coffee
+/etc/group 파일을 통해 coffee라는 그룹이 생성된 것을 확인.
+- coffee : 그룹명
+- x : 비밀번호
+- 1003 : 그룹id
+- 소속된 사용자(현재는 없음)
+2. 그룹에 사용자 추가.
+usermod [옵션] [그룹명] [사용자명]
+usermod -a -G coffee latte
+3. 소속 그룹 조회
+groups [계정명]
+4. 그룹이름변경
+groupmod -n [변경할이름] [기존이름]
+groupmod -n shop coffee
+5. 그룹 비밀번호 변경 /사용자 관리
+명령어 
+- 그룹 비밀번호 변경 : gpasswd [그룹명]
+- 사용자관리 : gpasswd [옵션] [사용자명] [그룹명]
+옵션
+-A [사용자명] [그룹명] : 사용자를 해당 그룹의 관리자로 임명
+-a [사용자명] [그룹명] : 사용자를 해당 그룹의 사용자로 추가.
+-d [사용자명] : 사용자를 해당 그룹에서 제거
+6. 그룹삭제
+groupdel [그룹명]
+
+* 리눅스 파일 및 디렉토리에 대한 소유자/그룹 변경
+1. 파일 및 디렉토리의 소유자와 그룹을 변경 : 리눅스에서는 파일이나 디렉토리 하나하나 마다 각각의 소유자와 소유그룹이 지정되어 있다.
+파일 및 디렉토리 제어를 위해 소유권에 대한 관리가 필요하다.
+명령어
+chown [옵션] [소유자:소유그룹] [디렉토리or파일명]
+옵션
+-R : 하위 디렉토리/파일에 모두 적용
+chown test:test test.c
+
+
+* 서버종료/재시작
+1. shutdown : 리눅스 서버의 종료와 재시작을 모두 수행하는 명령어
+- 관리자가 시스템을 종료할때의 작업순서와 shutdown을 했을대 커널에서 내부적으로 이루어지는 작업
+1) 접속해 있는 사용자들에게 시스템이 종료된다는 메시지를 보낸다.
+2) 새로운 사용자의 로그인을 금지한다.
+3) 지정된 시간내에 종료되지 않은 프로세스를 강제종료한다.
+4) 지정된 시간내에 로그아웃하지 않은 사용자를 강제종료한다.
+5) 메모리 남아있는 데이터를 디스크에 저장한다.(디스크동기화)
+6) 시스템에 종료에 관련된 정보를 시스템 로그파일에 기록한다.
+7) mount되어 있는 디바이스들을 umount한다.
+8) 시스템을 종료한다.
+사용형식 : shutdown [옵션] [시간] [경고메시지]
+/sbin/shutdown [-t sec] [-rkhncfF] time [warning-message]
+옵션
+-k : 실제로 종료하지 않고 모든 사용자에게 경고 메시지만을 보낸다.
+-r : 시스템 종료후에 재부팅을 한다.(reboot)
+-h : shutdown후에 시스템을 종료해 버린다.(halt)
+-f : 재부팅할때 fsck(file system check)를 하지 않는다. 빠른 rebooting
+-c : shutdown명령어를 취소한다.
+time : 몇분후에 시스템을 종료할 것인가를 지정한다.
+warning-message : 사용자에게 보내질 종료 메시지.
+shutdown 명령은 미리 사용자들에게 경고의 메세지를 보내고, 정해진 시간에 시스템을 종료할 수 있다.
+시간은 24시간제를 기준으로 하며 절대시간과 상대시간으로 표시한다.
+절대시간이라 hh:mm 의 형식이며(즈, 12:30 이런형식) 상대시간이란 +m으로 표시한다.
++m이란 m분 후에 시스템을 종료한다는 의미이다.
+(+10은 10분후에) now의 의미는 +0의 또 다른 표현이라고 보면 된다.
+example
+shutdown -h +10 : 10분후에 종료
+shutdown -r 22:00 : 호우 10시에 재가동
+shutdown -r now : 지금 즉시 종료
+shutdown -k now : 현재 접속된 사용자에게 종료 메세지만 보내고 실제 종료하지는 않음.
+reboot : 시스템을 종료한 후에 재부팅을 하는 명령어이다. 즉, shutdown -r now와 같다고 할 수 있다.
+poweroff /half : 서버를 종료하는 명령어
+서버를 종료하는 동일한 명령어 정리
+hlat
+shutdown -h now
+poweroff
+init 0
+
+* 프로세스에서 사용중인 File descriptor 확인하기.
+현재 프로세스에서 사용하고 있는 file descriptor 리스트 및 개수
+1. 실행중인 프로세스의 PID를 확인
+명령어 
+ps -ef | grep [프로세스명]
+2. proc에서 해당 프로세스의 fd정보를 확인.
+파일경로 cd /proc/[PID]/fd
+pwd
+ls -al
+표준입력(0),표준출력(1),표준에러(2)와 현재 사용중인 3번 fd를 확인할 수 있다.
+3. 해당 프로세스가 사용중인 자원 확인
+명령어
+lsof -p [PID]
+
+
+* cat & tail 파일보기
+1. cat 명령어 : cat(concatenate) 명령은 파일의 내용을 화면에 출력해 준다.
+명령형식 : $cat [option] [file_name]
+옵션
+-n : 라인 번호를 붙여서 파일을 출력.
+-b : -n옵션과 달리, 공백 라인은 제외하고 라인번호를 출력
+example)
+cat /etc/passwd : 파일을 화면에 출력
+cat -n /main.c : 파일을 라인번호와 함께 출력
+example)
+cat > tcp.c : 입력텍스트를 tcp.c파일로 저장
+cat tcp.c udp.c > socket.c : tcp.c, udp.c 파일을 순차적으로 출력하여, socket.c파일에 저장한다.
+cat tcp.c udp.c >> main.c : tcp.c, udp.c 파일을 순차적으로 출력하여 main.c파일에 덧붙인다.
+2. tail 명령어 : tail명령은 파일의 끝으로부터 10번째 줄까지를 디폴트로 보여준다.
+명령형식 : tail [option] [file_name]
+옵션
+-number : 파일의 끝으로부터 지정한 숫자만큼의 라인을 화면에 출력한다.
++number : 파일의 처음부터 지정한 숫자만큼 띈 라인부터 파일의 끝까지 화면에 출력
+-f : 파일에 추가되는 내용을 실시간으로 확인하는 것이 가능하다.
+example)
+tail /etc/passwd : /etc/passwd 파일의 끝부터 10번째 줄까지 화면에 출력.
+tail -20 /etc/passwd : /etc/passwd 파일의 끝부터 20번째 줄까지 화면에 출력.
+tail -f /var/log.txt : /var/log.txt 파일의 바뀌는 내용을 실시간으로 화면에 출력.
+=> tail 명령은 -f 옵션과 함께 사용하여, 불규칙적으로 기록되는 로그 파일을 실시간으로 살펴보기 위해 자주 사용한다.
+
+* ln 파일링크
+- ln(Link) 명령은 편리하게 디렉토리를 관리하기 위한 링크를 만들때 사용한다.
+- unix시스템에서 사용하는 링크에 하드링크(hardlink)와 심볼릭링크(symbolic link)가 있다.
+1. 하드링크
+2. 심볼릭링크
+명령형식 : ln [optoin] [sourcefile] [targetfile]
+옵션
+-s : 이 옵션이 있으면 심볼릭 링크, 없으면 하드 링크를 만든다.
+example)
+1. ln /var/tmp.c ~/work/tmp.c : /var/tmp.c파일을 ~/work/include 파일로 하드 링크 한다.
+2. ln -s /usr/local/include ~/work/include : /usr/local/include 디렉토리를 ~/work/include 디렉토리로 심볼릭 링크한다.
+=> 심볼릭링크는 여러 버전의 동일한 프로그램이 있을때, 접근하기 쉬운 디렉토리에 하나의 상징적 심볼릭 링크를 만들어 링크의 
+경로만 변경하여 동일한 파일 이름으로 다른 버전의 프로그램 또는 디렉토리에 접근할 수 있게 해준다.
+* diff 파일 비교
+1. diff: diff명령은 파일이 동일한지 여부를 검사할 때 사용한다.
+명령형식 : diff [option] [fileName1] [fileName2]
+옵션 
+-i : 대소문자를 구별하지 않는다.
+-b : 하나 이상의 공백문자는 모두 동일한 것으로 취급한다.
+example)
+diff data1.txt data2.txt : data1.txt파일과 data2.txt파일을비교하고, 어떻게 하면 두개의 파일이 갈라질수있는지를 출력.
+* grep 패턴 검색
+1. grep : grep명령은 파일 내에서 지정한 패턴이나 문자열을 찾은 후에, 그 패턴을 포함하고 있는 모든 행을 표준 출력해 준다.
+명령형식 : grep [option] [pattern] [filename1] [filename2]
+옵션 : 
+-c : 패턴이 일치하는 행의 수 출력
+-i : 비교시 대소문자를 구별하지 않음.
+-v : 지정한 패턴과 일치하지 않는 행만 출력
+-n : 행의 번호를 함께 출력
+-l : 패턴이 포함된 파일의 이름을 출력
+-w : 패턴이 전체 단어와 일치하는 행만 출력
+example)
+- grep -n mint /etc/passwd : /etc/passwd 파일내에서 mint 패턴을 포함한 행을 번호와 함께 출력.
+- ls | grep passwd : ls 명령의 출력중 passwd패턴을 포함한 행을 출력
+2. 패턴의 정규표현식(Reqular Expression) : 패턴 지정에서 사용되는 정규 표현식은 작은 따옴표('')로 묶어서 표현한다.
+- grep '^a' 파일명 : =^는 파일의 시작을 나타냄, 파일에서 a로 시작하는 행을 찾는다.
+- grep 'apple$' 파일명 : =$는 파일의 끝을 나타냄, 파일에서 e로 끝나는 행을 찾는다.
+- grep 'app*' 파일명 : =파일에서 app로 시작하는 모든 단어를 찾는다.
+- grep 'a.....e'파일명 : =파일에서 a로 시작하고, e로 끝나는 7자리 단어를 찾는다.
+- grep [a-d] 파일명 : =파일에서 a,b,c,d로 시작하는 단어를 모두 찾는다.
+- grep [aA]pple 파일명 : =파일에서 apple 또는 Apple로 시작하는 단어를 모두 찾는다. 
+- grep 'apple' d* : =d로 시작하는 모든 파일에서 apple를 포함하는 모든행을 찾는다.
+- grep 'apple' 파일명1 파일명2 : =지정된 두개의 파일에서 apple를 포함하는 모든 행을 찾는다.
+- grep '^[ab]'파일명 : =파일에서 a나 b로 시작되는 모든 행을 찾는다.
+* find 파일검색
+find : 명령은 시스템내에 있는 파일들 중에서 사용자가 원하는 파일을 찾을 때 사용한다.
+명령형식 : find [path] [option] [expression]
+옵션
+-name file_name : 검색 대상 파일명 입력
+-type file_type : 검색 대상 파일의 종류지정
+-user uname : 검색 파일의 소유주 또는 uid
+-group gname : 검색 파일의 소유 그룹 또는 gid
+-mtime[+-]n : 파일이 수정된 최근시간
+example)
+1. find . -name "*.c" : 현재 디렉토리부터 하위 디렉토리까지 검색하여 확장자가 c인 파일을 검색하여 출력.
+2. find . -name lib -type d : 현재 디렉토리부터 하위 디렉토리까지를 검색하여 lib란 이름의 디렉토리를 검색하여 출력.
+3. find . -mtime -3 : 현재 디렉토리부터 하위 디렉토리까지를 검색하여 파일을 수정한지 3일이 못된 파일을 검색한다.
++3은 3일이 지난 파일, 3은 3일ㅇ 된 파일을 검색한다.
+논리연산을 이용한검색
+find명령은 명시적으로 논리 연산을 사용하는것이 가능하다.
+find 응용
+find . -name "*.file" exec grep java {} \; 파일검색
+find . -name "*.file" exec grep -l java {} \; 파일검색
+
+
+!expression : NOT연산
+expression -a expression : AND 연산(default로 2개의 표현을 and 연산시 생략가능)
+expression -o expression : OR연산
+example)
+1. find \(-name "*.log" -o -name "*.o" \) : 현재 디렉토리부터 하위 디렉토리까지를 검색하여 확장자가 log또는 o인 파일을 검색하여 출력.
+2. 괄호는 find 명령이 괄호 안에 있는것을 하나의 단위로 평가하게 하고 싶을때 사용한다. 사용할 때 주의할 점은 괄호는 쉘이 해석하지 않고
+프로그램에서 해석해야 하므로 \를 붙여 사전 정의를 제거하고 그 자체로 인식되도록 한다.
+* GDB 명령어 정리
+1. 시작과 종료
+- 시작 : gdb [프로그래명][core파일명][pid]
+- 종료 : q or ctrl + d
+2. 소스보기 (list or l)
+- list : main 함수 기점으로 소스 출력
+- list 10 : 10행을 기준으로 출력
+- list func : func함수의 소스를 출력(c++의 클래스 멤버의경우 클래스이름도 입력해야 함)
+- list -: 출력된 행의 이전행을 출력
+- list file.c:func : file의 func함수 부분을 출력
+- file.c:10 : file의 10행을 기준으로 출력
+3. 브레이크포인트(break or b)
+- break func : func함수의 시작부분에 브레이크 포인트 설정
+- break 10 : 10행에 브레이크포인트 설정
+- break file.c:func : 파일에 func함수에 브레이크 포인트 설정
+- break file.c:10 : 파일에 10행에 브레이크 포인트 설정
+- break +2 : 현재 행에서 2개 행 이후 브레이크 포인트 설정
+- break -2 : 현재 행에서 2개 행 이전 지점에 브레이크 포인트 설정
+- break *0x8049000 : 특정 주소에 브레이크 포인트 설정
+- break 10 if var == 0 : 10행에 브레이크포인트를 설정하는데 var값이 0일때 작동.
+- tb break 와 같으나 1회용 브레이크 포인트임. 문법은 b와 같음
+- info break : 현재 브레이크 포인트 보기
+- cl : 브레이크 포인트 지우기 (옵션은 b와 유사하다.)
+- d : 모든 브레이크 포인트 지우기
+3. 진행 명령어
+- run(r) : 프로그램 수행(ndk환경에서는 지원되지 않는다.)
+- kill(k) : 프로그램 수행 종료
+- step(s) : 현재 행 수행 후 정지, 함수 호출시 함수 안으로 들어감.
+-s 5 : step 다섯번 수행과 동일
+- next(n) : 현재 행 수행 후 정지, 함수 호출시 함수 수행 다음행으로 감.
+-n 5 : next 다섯번 수행과 동일
+- continue(c) : 다음 브레이크 포인트가지 진행
+- u : 현재 루프를 빠져나감
+- finish : 현재 함수를 수행하고 빠져 나감
+- return : 현재 함수를 수행하지 않고 빠져 나감
+- return 123 : 위와 같으나 리턴값을 지정함.
+- si : 어셈블리 명령어 단위의 수행(진행은 step과 같음)
+- ni : 어셈블리 명령어 단위의 수행(진행은 next과 같음)
+4. 와치포인트(watch)
+- watch 변수명 : 특정변수에 와치 포인트를 설정하고, 특정변수가 바뀔때마다 브레이크가 걸리면서 이전/현재값을 출력한다.
+5. 변수출력관련
+- info locals : 현재 스택의 로컬변수 모두 출력
+- info variables : 전역변수 모두 출력(스크롭 압박주의)
+- p [변수명] : 해당변수value출력(포인터변수 입력시 주소값 출력, *포인터변수명시 실제 value출력)
+
+
+#리눅스 간단정리
+
+원본 URL: http://blog.naver.com/PostView.nhn?blogId=xein&logNo=60034286400&beginTime=0&jumpingVid=&from=search&redirect=Log&widgetTypeCall=true&topReferer=http%3A%2F%2Fsearch.naver.com%2Fsearch.naver%3Fsm%3Dtab_hty.top%26where%3Dnexearch%26ie%3Dutf8%26query%3D%25EC%259A%25B0%25EB%25B6%2584%25ED%2588%25AC%2B%25EB%25A7%2588%25EC%259A%25B4%25ED%258A%25B8
+작성자: 김용연
+
+1. 파일 구분
+리눅에서는 파일을 확장명이 아니라 색깔로 구분한다.
+검정- 파일, 파랑-폴더, 녹생- 실행, 그외-특수파일
+
+2. 하드 용량 확인
+* 디스크 사용량 확인
+df -h : 킬로바이트 단위 뿐만 아니라 메가, 기가 단위로 표현된다.(human-readable)
+df -B1 : 블럭의 크기를 1(바이트)로 지정하면 바이트 단위로 볼 수 있다.
+df -P : 경로가 길경우 한줄로 표현 하여 보임.
+
+* 전체용량
+KB단위 : df -P | grep -v ^Filesystem | awk '{sum += $2} END { print sum " KB" }'
+GB단위 : df -P | grep -v ^Filesystem | awk '{sum += $2} END { print sum/1024/1024 " GB" }'
+
+* 전체 사용량
+KB단위: df -P | grep -v ^Filesystem | awk '{sum += $3} END { print sum " KB" }'
+GB단위: df -P | grep -v ^Filesystem | awk '{sum += $3} END { print sum/1024/1024 " GB" }'
+
+* 전체남은용량
+KB단위: df -P | grep -v ^Filesystem | awk '{sum += $4} END { print sum " KB" }'
+GB단위:  df -P | grep -v ^Filesystem | awk '{sum += $4} END { print sum/1024/1024 " GB" }'
+
+* 전체사용률
+DISK_TOTAL=`df -P | grep -v ^Filesystem | awk '{sum += $2} END { print sum; }'`
+DISK_USED=`df -P | grep -v ^Filesystem | awk '{sum += $3} END { print sum; }'`DISK_PER=`echo "100*$DISK_USED/$DISK_TOTAL" | bc -l`
+echo "$DISK_PER %"
+
+* 리눅스 디스크 용량 확인
+fdis -l | grep Disk
+GB단위
+fdisk -l | egrep 'Disk.*bytes' | awk '{ sub(/,/,""); sum +=$5;print $1" "$2" "$3" "$4" "$5" "$6 } END { print "total: " sum/1024/1024/1024 " GB" }'
+Byte단위
+fdisk -l | egrep 'Disk.*bytes' | awk '{ sub(/,/,""); sum +=$5;print $1" "$2" "$3" "$4" "$5" "$6 } END { print "total: " sum" Bytes" }'
+
+* 디렉토리 용량 확인
+du -hs 폴더  : 해당 폴더 용량 확인
+du -hs * : 현재폴더에 있는 폴더 및 파일 용량 확인
+du * | sort -n | tail -10 : 현재 폴더에 있는 폴더 및 파일 중에서 용량이 큰 것 순으로 10개 보기
+-hs 옵션을 주면 sort가 제대로 되지 않는다. 예를 들어 2.3G보다 12M을 큰것으로 인식한다. 따라서 여기서는 -hs를 빼도록 한다.
+du -hs /* 2> /dev/null : /(최상위 폴더)의 자식폴더 용량 보기
+du -hs /usr : 특정 폴더 및 그 자식폴더 용량 보기
+
+3. 마운트방법
+ntfs 파일 시스템을 마운트 할때..
+sudo mount -t ntfs -o nls= utf8,umask=0222 /dev/mapper/isw_djfccdadhf_ operatorB1 /media/operatorDATA
+
+fat32/fat16 파일 시스템을 마운트 할때..
+sudo mount -t vfat -o user,iocharset=euc-kr,codepage=949,users,gid=users,umask=0002, utf8 =true /dev/sda2 /media/trance
+
+예)/dev/mapper/isw_djfccdadhf_ operatorB1 과 /media/operatorDATA
+예)/dev/sda2 과 /media/trance
+
+4. 열려있는 포트확인
+nmap -sT -p 1-65535 localhost
+netstat -anp | grep LISTEN
+
+시스템에서 관리하는 포트
+vim /etc/services
+
+5. 프로세스 확인
+ps -ef
+-e: 모든 프로세스를 보여줌
+-f: 전체경로로 프로세스를 표시
+특정프로세스만 보여주도록 하는 예
+ps -ef | grep java
+
+6. ping 연결상태
+ping localhost
+
+7. 파일 찾기
+find / -name httpd.conf : 리눅스 파일 찾기
+find . -type d : 하위디렉토리 전체(recursive)
+find . -maxdepth 1 -type d : 하위디렉토리
+
+* find exec 여러 명령어 실행
+find . -name '파일명검색어' -exec sh -c "명령어1; 명령어2; 명령어3;" \;
+find로 조건에 맞는 파일목록을 추출하여 1) 압축하고, 2)원본을 삭제
+
+8. 웹서버 접속 수
+netstat -an | grep :80.*ESTABLISHED | wc -l
+netstat -an | grep :80 | grep ESTABLISHED | wc -l
+
+9. DB접속 세션 수
+SHOW PROCESSLIST
+select count(*) from v$session where status='ACTIVE'
+
+10. 접속자 실시간 확인 : 아파치 로그 access log
+tail -f /var/log/httpd/access_log
+로그 순환 예시
+ll /var/log/httpd/access_log
+
+11. rpm 설치/확인/제거
+rpm -ivh 패키지명 : 설치
+rpm -qa | grep 패키지명 : 확인
+rpm -ev 패키지명 : 제거
+rpm -Uvh 패키지명 : 업그레이드
+
+- 파일이 속한 패키지 찾기
+rpm -qf 파일
+
+- rpm 패키지 정보 보기(info)
+rpm -qi 설치된패키지명
+rpm -qip 파일명.rpm
+
+- rpm 내부 파일목록 보기(list)
+rpm -ql 설치된패키지명
+rpm -qlp 파일명.rpm
+
+- rpm 내부 설정파일 확인
+rpm -qc 설치된패키지명
+rpm -qcp 파일명.rpm
+
+- rpm 내부 문서파일 확인
+rpm -qd 설치된패키지명
+rpm -qdp 파일명.rpm
+
+- rpm 내부 스크립트 확인
+rpm -q --scripts 설치된패키지명
+rpm -qp --scripts 파일명.rpm
+
+12. 패키지관리자
+Debian 패키지 관리자
+.deb 패키지를 설치, 제거
+
+dpkg -i 패키지파일명 : 설치
+dpkg -r 패키지명 : 제거
+dpkg -l : 설치된 패키지 목록보기
+dpkg -l | grep 패키지명
+dpkg --get-selections | grep java
+
+13. 리눅스 환경변수
+env
+리눅스 set과 env 차이점
+리눅스 로컬환경변수와 글로벌환경변수의 차이
+env : 글로벌 환경변수 조회 명령어
+set : 로컬 환경변수 조회 명령어
+글로벌 환경변수가 로컬 환경변수보다 상위 개념
+
+14. 리눅스 포토 프로세스 목록 확인 : 리눅스 열린 포트 + 프로세스 목록 뽑기
+netstat -tnlp | grep -v 127.0.0.1 | sed 's/:::/0 /g' | sed 's/[:\/]/ /g' | awk '{print $5"\t"$10}' | sort -ug
+
+15. 계정
+- 계정이 있는지 확인
+cat /etc/passwd | grep 계정명 : 계정이 있는지 확인
+-계정+홈 생성
+useradd 계정명
+CentOS 등 레드햇 계열에서는 아무 옵션을 주지 않아도 홈 디렉토리가 생성되지만, SUSE의 경우에는 -m 옵션을 명시해야 홈 디렉토리가 생성된다.
+- 그룹 지정하여 만들기
+useradd 계정명 -G 그룹명
+- UID 지정하여 만들기
+useradd 계정명 -u 사용자아이디
+- 리눅스 셀 권한 없는 사용자 계정 생성
+ssh 접속은 안되지만, ftp접속은 되는 계정을 만들 수 있다.
+리눅스에서는 bash 셀 사용권한이 없는 사용자 계정을 만드려면 useradd의 -s 옵션에 /sbin/nologin 또는 /bin/false를 주면 된다.
+시스템 게정이나 apache 계정 등이 보통 nologin 이다.
+grep nologin /etc/passwd
+useradd -s /sbin/nologin 사용자명
+grep 사용자명 /etc/passwd
+su - 사용자명
+- /bin/false
+useradd -s /bin/false 사용자명
+- 리눅스 계정 삭제
+- 계정 + 홈 디렉토리 삭제
+userdel -r 계정명
+- 홈폴더가 삭제되어 있는지 확인
+ll /home | grep 계정명
+- 계정만 삭제
+userdel 계정명
+sftp만 되는 계정 생성
+shell 로그인 권한이 없고 sftp만 접속할 수 있는 계정 설정하기.
+nologin 계정에 sftp를 허용하는 방법
+- 계정생성
+useradd -s /sbin/nologin 계정명
+- 패스워드 지정 & 확인
+echo '패스워드' | passwd --stdin 계정명
+ssh 계정명@localhost
+
+16. ftp 설정 ( vsftpd)
+apt-get install vsftpd
+adduser student
+vim /etc/vsftpd.conf
+anonymous_enable=NO #익명접근 허용안함
+local_enable=YES #계정접속활성화
+write_enable=YES #쓰기활성화
+chroot_local_user=YES #루트탐색금지시킨것
+chroot_list_enable=YES #루트탐색할수있는계정리스트허용
+
+* YES, NO는 대문자로 써야 한다.
+(참고로 루트 계정을 탐색할수 있는 계정 리스트 만들기
+vsftpd.chroot_list라는 파일을 만든 뒤 안에 계정이름을 걍 적어준다.(엔터구분)
+그런 뒤에, chroot_list_file=/etc/vsftpd.chroot_list로 설정파일 바꿔주면 됨)
+
+- 추가 설정 변경 - 세부 FTP 권한 설정
+/etc/ 안에 vsftpd_user_conf 라는 폴더를 생성
+그 안에 권한을 조정하고자 하는 계정의 이름으로 파일을 하나 만들어 줌.
+ex) /etc/vsftpd_user_conf/student
+여기에 추가되는 설정들은 /etc/vsftpd.conf보다 우선한다.
+1) 나는, student가 접속했을 때 다른 폴더로 접속하게 하고 싶으므로,
+local_root=/home/username/ftp
+2) 과제 제출을 위한 ftp이므로 세부 퍼미션 설정을 해줘야 한다.
+cmds_allowd=LIST,CWD,STOR,QUIT,PASS,PASV,PWD,ACCT,USER,STAT,NOOP,PORT,NLIST,SITE,ABOR,SYST,TYPE,STRU
+LIST,CWD와 같은 것들은 raw ftp 명령어들인데, 허용하고자 하는 것만 써주면 된다.
+참고로 저 위에 내가 써놓은 건 업로드만 가능하고 아무것도 못하는 설정이다. 노가다 ㅠㅡ
+ftp 명령어들은 포스트 아래에 첨부하였다.
+3) 그 다음, /etc/vsftpd.conf를 열어서
+user_config_dir=/etc/vsftpd_user_conf
+를 추가한다.
+
+ftp 재시작
+sudo service vsftpd restart
+
+쓰기 권한 : chmod 777
+쓰기 권한 삭제 : chmod 755
+
+17. cat, more, less, head, tail
+- cat 명령어는 텍스트로 된 파일일 경우 그 내용을 정상적으로 출력하지만 바이너리 파일일 경우에는 출력은 하지만 알아볼 수 없다. 그리고 2개 이상의 파일 이름이 지정되면
+모든 파일이 연결되어 보여진다.
+cat test : test파일을 열어봄
+cat -b test : 각 행에 번호를 붙여서 출력
+cat -n test : 빈 행에도 번호를 붙임
+cat -s test : 연속되는 2개이상의 빈 행을 한행으로 출력
+
+- more 명령어는 특정파일의 내용을 확인하는 그 페이지에서 바로 vi로 파일을 열어서 편집을 할 수도 있으며 텍스트 파일의 내용을 한 페이지씩 차례대로 확인할 수 있다.
+more test 
+많은 양의 파일리스트를 확인할때 파이프를 이용해 연결
+ls -l /etc/ | more
+
+- less less는 more와 매우 유사하다.
+less test
+ls -l | less
+
+- head는 파일의 앞부분부터 확인하는 명령어이다.
+head test
+head -n 20 test
+head -c 200 test
+
+- tail은 특정파일에 계속 추가되는 모든 내용을 모니터링 할 수 있어 실무에서 유용하게 사용되는 명령어이다.
+tail test
+tail -n 20 test
+tail -c 200 test
+tail -f /var/log/messages
+
+
+
+

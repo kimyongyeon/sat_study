@@ -1,0 +1,264 @@
+
+.bash_profile : 환경설정패스, alias 등
+
+.vimrc : vm 설정파일, 탭간격, 하이라이트 등
+
+ln : 링크걸기
+
+find . -name *.java : 해당 위치 하위폴더 아래 확장자 java 파일 모두 찾기.
+
+find . -name .svn -exec {} rm -dfR /; 위 파일들 모두 지우기
+
+grep -r "from" ./list.py : 해당 파일 및 폴더에서 문자열 찾기.
+
+파일검색 상세 사이트 : http://n4dev.blogspot.kr/2013/09/linux.html
+
+하드링크 : ln source target
+
+심볼릭링크 : ln -s source target
+
+심볼릭링크 : 바로가기
+
+하드링크 : inode 넘버가 같다.
+
+mv : 파일, 폴더 이동
+
+cp : 파일, 폴더 복사
+
+ditto -V Money ../Desktop/Money : 대용량 파일 폴더 복사
+
+uptime : 맥 가동 시간 보기
+
+yes : cpu에 과도한 작업하기
+
+k,g,b
+$ mkfile 1g test.tmp
+
+say “hi” : 말하기
+
+say -f 파일명.txt : 파일명에 있는 내용을 말로 읽어 주기.
+
+logout : terminal logout
+
+rm : 파일, 폴더 삭제
+
+mkdir : 폴더 생성
+
+rmdir : 폴더 삭제
+
+touch : 파일생성
+
+ps : 프로세스 보기
+
+kill:프로세스죽이기
+
+압축 : tar cvf [압축파일명] [폴더/파일명/현재위치]
+
+해제 : tar xvf [압축파일파일명]
+
+history : 로그 확인
+
+hitory -c : 로그 지우기
+
+open -e [파일명] : 텍스트 편집창으로 열기
+
+ls : 파일 보기
+
+ls -al : 파일 목록 상세보기
+
+pwd : 경로보기
+
+tree : 현재 트리구조 보기
+
+!! : 바로직전 명령어 실행
+
+clear : 화면 지우기
+
+whoami : 현재 사용자
+
+명령어 모음 사이트 : http://www.mireene.com/webimg/linux_tip1.htm
+
+맥 숨김 파일 표시
+defaultswritecom.apple.finderAppleShowAllFiles-booltrue
+
+맥 아파치 죽이기
+sudo apachectl stop
+
+port 확인방법
+yongyeonui-MacBook-Pro:~ yongyeonkim$ lsof -i :8080
+
+port 죽이기
+yongyeonui-MacBook-Pro:~ yongyeonkim$ kill -9 60163
+
+FTP 접속방법
+ssh {userid}@{SERVER_IP}
+
+FTP서버 구동하기
+Terminal command:
+sudo -s launchctl load -w /System/Library/LaunchDaemons/ftp.plist
+
+FTP서버 중지:
+sudo -s launchctl unload -w /System/Library/LaunchDaemons/ftp.plist
+
+echo $PATH : 현재 환경설정이 걸린 path를 보여준다.
+
+.bash_profile
+시스템에 로그인할 때마다 실행된다. (login shell 에서 실행된다)
+.bash_profile 을 찾지 못하면, .bash_login 을 찾고, 없다면 .profile 을 찾는다.
+
+.bashrc
+이미 로그인 한 상태에서 새 터미널 창을 열 때마다 실행된다. (non-login shell에서 실행된다)
+
+.bash_logout
+login shell을 종료할 때마다 실행한다.
+
+단, Mac OS X에서는 로그인 여부에 관계 없이 모든 터미널 창을 login shell로 실행한다.
+
+만약 새 터미널 창을 열 때마다 .bash_profile 을 실행하게 하고 싶다면,
+.bashrc 에서 .bash_profile 을 호출하도록 해두면 된다.
+
+.bash_profile 의 경우, 아래와 같은 순서로 실행된다.
+1. /etc/profile 을 실행한다.
+2. ~/.bash_profile 을 실행한다.
+2.1. 없다면, ~/.bash_login 을 실행한다.
+2.2. 없다면, ~/.profile 을 실행한다.
+
+실행 순서에 대한 좀 더 자세한 내용은 아래 포스트를 참고하자.
+http://www.thegeekstuff.com/2008/10/execution-sequence-for-bash_profile-bashrc-bash_login-profile-and-bash_logout/#more-232
+
+이 파일들은 기본 실행 파일은 아니며,
+.bash_profile 에서 아래와 같이 설정해 나눠둔 파일을 불러와 실행하고 있다.
+
+  for file in ~/.{extra,bash_prompt,exports,aliases,functions}; do
+      [ -r "$file" ] && source "$file"
+  done
+
+.bashrc 나 .vimrc 와 같은 파일에서 rc 는 "Run Commands" 를 의미한다.
+
+Prompt 기본 표현
+터미널을 사용할때 프롬프트(Prompt)는 많은 정보를 포함할 수 있다. bash shell 에서 프롬프트는 $PS1이라는 shell 변수에 들어있다. 다음은 Mac의 터미널을 열면 기본적으로 나타나는 프롬프트이다. $PS1에 어떤 정보가 저장되어 있는지 확인하기 위해서 $PS1 변수를 echo 하면 다음과 같이 나타난다.
+* \h 는 현재의 호스트의 이름(hostname)을 나타내는 것이다.
+* \W 는 현재의 위치의 디렉토리(Working Directory)를 나타내는 것이다.
+* \u 는 현재의 로그인된 사용자 (user name)을 나타내는 것이다
+
+Mac에서 디폴트 프롬프트는 다음 코드 들이 저장되어 있다.
+
+\h:\W \u\$
+{호스트이름}:{현재 디렉토리} {로그인된 사용자}$
+
+만약 프롬프트에 현재의 시간을 나타내고 싶으면 \t 를 사용하면 된다. 다음 예는 ({현재시간}) {로그인된 사용자}$ 를 나타내려고 할때이다.
+
+export PS1="(\t) \u$ "
+
+Prompt 코드 정보
+
+프롬프트에 들어갈 수 있는 코드는 다음과 같다.
+* \a : an ASCII bell character (07)
+* \d : the date in “Weekday Month Date” format (e.g., “Tue May 26”)
+* \D{format} : the format is passed to strftime(3) and the result is inserted into the prompt string; an empty format results in a locale-specific time representation. The braces are required
+* \e : an ASCII escape character (033)
+* \h : the hostname up to the first ‘.’
+* \H : the hostname
+* \j : the number of jobs currently managed by the shell
+* \l : the basename of the shell’s terminal device name
+* \n : newline
+* \r : carriage return
+* \s : the name of the shell, the basename of $0 (the portion following the final slash)
+* \t : the current time in 24-hour HH:MM:SS format
+* \T : the current time in 12-hour HH:MM:SS format
+* \@ : the current time in 12-hour am/pm format
+* \A : the current time in 24-hour HH:MM format
+* \u : the username of the current user
+* \v : the version of bash (e.g., 2.00)
+* \V : the release of bash, version + patch level (e.g., 2.00.0)
+* \w : the current working directory, with $HOME abbreviated with a tilde
+* \W : the basename of the current working directory, with $HOME abbreviated with a tilde
+* \! : the history number of this command
+* \# : the command number of this command
+* \$ : if the effective UID is 0, a #, otherwise a $
+* \nnn : the character corresponding to the octal number nnn
+* \\ : a backslash
+* \[ : begin a sequence of non-printing characters, which could be used to embed a terminal control sequence into the prompt
+* \] : end a sequence of non-printing characters
+
+위의 코드와 문자열, 숫자, 특수 기호를 조합하여 자신에 맞는 프로프트를 만들어 낼 수 있다. 터미널에서 작업을 하다보면 프롬프트와 command(명령어) 하나의 문자인 것 처럼 보여서 구분이 되지 않을 때가 있을 수도 있다. 그래서 호스트 이름과 디렉토리 이름 그리고 현재 로그인된 사용자의 이름을 구분되어지면 좋겠다고 생각할 것이다. 이 때, 위의 코드 처럼 색상을 지정하는 코드도 존재한다.
+
+Prompt 색상 정보
+* 0;30 : Black
+* 0;34 : Blue
+* 0;32 : Green
+* 0;36 : Cyan
+* 0;31 : Red
+* 0;35 : Purple
+* 0;33 : Brown
+* 0;34 : Blue
+* 0;32 : Green
+* 0;36 : Cyan
+* 0;31 : Red
+* 0;35 : Purple
+* 0;33 : Brown
+* \e[ : Start color scheme
+* x;y : Color pair to use (x;y)
+* $PS1 : is your shell prompt
+* \e[m : Stop color scheme
+
+만약 프롬프트를 모두 빨간 색으로 하고 싶으면 다음과 같이 하면 된다.
+
+export PS1="\e[0;31m[\u@\h \W]\$ \e[m "
+
+# define colors
+
+C_DEFAULT="\[\033[m\]"
+
+C_WHITE="\[\033[1m\]"
+
+C_BLACK="\[\033[30m\]"
+
+C_RED="\[\033[31m\]"
+
+C_GREEN="\[\033[32m\]"
+
+C_YELLOW="\[\033[33m\]"
+
+C_BLUE="\[\033[34m\]"
+
+C_PURPLE="\[\033[35m\]"
+
+C_CYAN="\[\033[36m\]"
+
+C_LIGHTGRAY="\[\033[37m\]"
+
+C_DARKGRAY="\[\033[1;30m\]"
+
+C_LIGHTRED="\[\033[1;31m\]"
+
+C_LIGHTGREEN="\[\033[1;32m\]"
+
+C_LIGHTYELLOW="\[\033[1;33m\]"
+
+C_LIGHTBLUE="\[\033[1;34m\]"
+
+C_LIGHTPURPLE="\[\033[1;35m\]"
+
+C_LIGHTCYAN="\[\033[1;36m\]"
+
+C_BG_BLACK="\[\033[40m\]"
+
+C_BG_RED="\[\033[41m\]"
+
+C_BG_GREEN="\[\033[42m\]"
+
+C_BG_YELLOW="\[\033[43m\]"
+
+C_BG_BLUE="\[\033[44m\]"
+
+C_BG_PURPLE="\[\033[45m\]"
+
+C_BG_CYAN="\[\033[46m\]"
+C_BG_LIGHTGRAY="\[\033[47m\]"
+
+호스트이름과 디렉토리 정보를 각각 다른 색상으로 나타내고 싶으면 다음과 같이 한다.
+
+export PS1="$C_CYAN\h:$C_YELLOW\W \$$C_DEFAULT "
+
+
