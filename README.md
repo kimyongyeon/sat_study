@@ -11,5 +11,4 @@
 - typescript 연습
 - coffescript 연습
 
-
-
+여기가 충돌이다.
