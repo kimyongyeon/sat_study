@@ -1,0 +1,211 @@
+npm install - g babel webpack webpack - dev - server
+
+npm install--save react react - dom
+
+npm install--save - dev babel - core babel - loader babel - preset - react babel - preset - es2015 webpack webpack - dev - server
+
+--webpack - dev
+const path = require("path");
+const WebpackBrowserPlugin = require('webpack-browser-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const extractLess = new ExtractTextPlugin({
+    filename: "[name].[contenthash].css",
+    disable: process.env.NODE_ENV === "development"
+});
+
+module.exports = {
+    entry: "./src/tsx/Main.tsx",
+    output: {
+        path: path.resolve(__dirname, "dist"),
+        filename: "bundle.js"
+    },
+    devtool: "source-map",
+    resolve: {
+        extensions: [".ts", ".tsx"]
+    },
+    plugins: [
+        // html 소스에 포함하고 reload
+        new HtmlWebpackPlugin({
+            template: './src/index.html'
+        }),
+        // 브라우저에서 ts파일 수정시 실시간 reload
+        new WebpackBrowserPlugin(),
+        new ExtractTextPlugin('[name].css'),
+        extractLess
+    ],
+    module: {
+        rules: [{
+            test: /\.less$/,
+            use: [{
+                loader: "style-loader"
+            }, {
+                loader: "css-loader"
+            }, {
+                loader: "less-loader",
+                options: {
+                    strictMath: true,
+                    noIeCompat: true
+                }
+            }]
+        }],
+        loaders: [{ // ts -> js
+            test: /\.tsx?$/,
+            loaders: ["babel-loader", "ts-loader"],
+        }, { // css
+            test: /\.css$/,
+            loader: "style-loader!css-loader"
+        }, { // 이미지 최적화
+            test: /\.(jpg|png|svg)$/,
+            loader: 'url-loader',
+            options: {
+                limit: 25000
+            }
+        }, { // 이미지 최적화
+            test: /\.(jpg|png|svg)$/,
+            loader: 'file-loader',
+            options: {
+                name: '[path][name].[ext]'
+            }
+        }]
+    },
+    devServer: {
+        //inline: true hot: true
+    }
+}
+
+--webpack.prod "use strict";
+
+var path = require("path");
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const extractLess = new ExtractTextPlugin({
+    filename: "[name].[contenthash].css",
+    disable: process.env.NODE_ENV === "development"
+});
+
+module.exports = {
+    entry: "./src/index.tsx",
+    output: {
+        path: path.resolve(__dirname, "dist"),
+        filename: "bundle.js"
+    },
+    resolve: {
+        extensions: [".tsx", ".ts", ".js", ".html", ".css"]
+    },
+    plugins: [
+        new CleanWebpackPlugin("dist"), // 청소
+        new HtmlWebpackPlugin({
+            template: './src/index.html'
+        }), // html을 소스에 포함
+        new ExtractTextPlugin('[name].css'),
+        extractLess
+    ],
+    module: {
+        rules: [{
+            test: /\.less$/,
+            use: [{
+                loader: "style-loader"
+            }, {
+                loader: "css-loader"
+            }, {
+                loader: "less-loader",
+                options: {
+                    strictMath: true,
+                    noIeCompat: true
+                }
+            }]
+        }],
+        loaders: [{ // ts -> js
+            test: /\.tsx?$/,
+            loaders: ["babel-loader", "ts-loader"],
+        }, { // css
+            test: /\.css$/,
+            loader: "style-loader!css-loader"
+        }, { // 이미지 최적화
+            test: /\.(jpg|png|svg)$/,
+            loader: 'url-loader',
+            options: {
+                limit: 25000
+            }
+        }, { // 이미지 최적화
+            test: /\.(jpg|png|svg)$/,
+            loader: 'file-loader',
+            options: {
+                name: '[path][name].[ext]'
+            }
+        }]
+    }
+}
+
+--webpack - react
+const WebpackBrowserPlugin = require('webpack-browser-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+
+module.exports = {
+    entry: "./src/tsx/Index.tsx",
+    output: {
+        filename: "bundle.js",
+        path: __dirname + "/dist"
+    },
+
+    // Enable sourcemaps for debugging webpack's output.
+    devtool: "source-map",
+
+    resolve: {
+        // Add '.ts' and '.tsx' as resolvable extensions.
+        extensions: [".ts", ".tsx", ".js", ".json"]
+    },
+
+    plugins: [
+        // html 소스에 포함하고 reload
+        new HtmlWebpackPlugin({
+            template: './src/index.html'
+        }),
+        // 브라우저에서 ts파일 수정시 실시간 reload
+        new WebpackBrowserPlugin()
+    ],
+
+    module: {
+        // rules: [
+        // // All files with a '.ts' or '.tsx' extension will be handled by 'awesome-typescript-loader'.
+        // { test: /\.tsx?$/, loader: "awesome-typescript-loader" },
+        // // All output '.js' files will have any sourcemaps re-processed by 'source-map-loader'.
+        // { enforce: "pre", test: /\.js$/, loader: "source-map-loader" }
+        // ],
+        loaders: [{ // ts -> js
+            test: /\.tsx?$/,
+            loaders: ["babel-loader", "ts-loader"],
+        }, { // css
+            test: /\.css$/,
+            loader: "style-loader!css-loader"
+        }, { // 이미지 최적화
+            test: /\.(jpg|png|svg)$/,
+            loader: 'url-loader',
+            options: {
+                limit: 25000
+            }
+        }, { // 이미지 최적화
+            test: /\.(jpg|png|svg)$/,
+            loader: 'file-loader',
+            options: {
+                name: '[path][name].[ext]'
+            }
+        }]
+    },
+
+    // When importing a module whose path matches one of the following, just
+    // assume a corresponding global variable exists and use that instead.
+    // This is important because it allows us to avoid bundling all of our
+    // dependencies, which allows browsers to cache those libraries between builds.
+    // externals: {
+    // // "react": "React",
+    // // "react-dom": "ReactDOM"
+    // },
+
+    devServer: {
+        historyApiFallback: true
+            // contentBase: __dirname + '\\dist'
+    }
+};
