@@ -1,4 +1,15 @@
 # sat_study
-nodejs 서버 구축 해보기
+> nodejs 서버 구축 해보기
 
-#  수정해서 올립니다. 파일을... 180721
+# 180721
+> 수정해서 올립니다.
+
+# 180729
+> 링크 연습
+- markdown 연습
+- javascript 연습
+- typescript 연습
+- coffescript 연습
+
+
+
