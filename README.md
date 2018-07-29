@@ -12,3 +12,5 @@
 - coffescript 연습
 - 여기가 충돌이다.
 - 충돌 연습
+- prod는 여기서 관리하는 것이 아니다. 
+- gitignore branch별로 관리하기.
