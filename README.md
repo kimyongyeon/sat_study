@@ -15,3 +15,5 @@
 - prod는 여기서 관리하는 것이 아니다. 
 - gitignore branch별로 관리하기.
 - git ignore 파일을 수정하였습니다.
+- 제대로 하자.
+
