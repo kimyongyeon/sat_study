@@ -10,5 +10,5 @@
 - javascript 연습
 - typescript 연습
 - coffescript 연습
-
-여기가 충돌이다.
+- 여기가 충돌이다.
+- 충돌 연습
