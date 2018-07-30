@@ -15,6 +15,7 @@
             margin:0px;
         }
     </style>
+    <script id="srcIndex" src="index.js?q="></script>
 </head>
 <body>
 
@@ -69,13 +70,23 @@
     </table>
 
 </body>
+
 <script>
+    // fnHome.init();
+    home.init();
+    home.destroy();
     // 정적인 html, css
     // 동적인 html, css, js
 
     // CRUD
     // C: create 생성
+    function fnCreate(){
+        console.log("create called");
+    }
     // R: read 읽기
+    function fnRead() {
+        console.log("read called");
+    }
     // U: update 수정
     // D: delete 삭제
 
@@ -263,4 +274,5 @@
     // $("#myName").text("영희");
 
 </script>
+
 </html>
