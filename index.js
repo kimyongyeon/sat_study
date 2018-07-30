@@ -17,12 +17,33 @@ var home = {
         var model = localStorage.getItem("realModel");
         console.log("readModel: " + model);
 
+        this.event.insert();
+        this.event.update();
+        this.event.delete();
+
+        console.log(this);
+
+        var list = this.model.dumyList();
+        console.log(list);
+
         console.log("결정적인 변화... 어떻게 줘야 하는가....");
         console.log("end");
 
     },
-    event: function() {
-        console.log("event init");
+    uiDraw: function() {
+        console.log("ui Draw called");
+    },
+    event: {
+        insert: function(){
+            console.log("입력");
+        },
+        update: function(){
+            console.log("수정");
+        },
+        delete: function(){
+            console.log("삭제");
+        }
+
     },
     controller: function() {
         console.log("controller init");
@@ -30,7 +51,24 @@ var home = {
     model: {
         name: '',
         phone: '',
-        addr: ''
+        addr: '',
+        dumyList: function() {
+            console.log(this);
+            var list = [];
+            for(var i=0;i<10;i++) {
+                var nModel = {
+                     name: "t"+i
+                    ,phone: "p"+i
+                    ,addr: "a"+i,
+                }
+                list.push(nModel);
+                // this.name="t"+i;
+                // this.phone="p"+i;
+                // this.addr="a"+i;
+                // list.push(this);
+            }
+            return list;
+        }
     },
     destroy: function() {
         var d = new Date();
@@ -41,6 +79,6 @@ var home = {
         console.log(result);
         $("#srcIndex").attr("src", $("#srcIndex").attr("src") + result);
     }
-}
+};
 
 // window.fnHome = home;
