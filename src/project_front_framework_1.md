@@ -1,0 +1,26 @@
+# 프로젝트 신규 front 프레임워크 컨버팅 조사
+- nodejs + ejs + jquery + html5
+- nodejs + ejs + (react + angular + vue)
+- client : router - rendering 
+    - 비동기처리를 하면서 빠른속도가 보장되요.
+- server : router - rendering 
+    - 항상 모두 그리기 때문에 속도가 느리다. (인간이 느끼지는 못함.)
+- react : 
+    - 자바스크립트 자체로 개발이 가능하지만, 
+    - 라이브러리를 공부해야 하고,   
+    - 미들웨어를 공부해야 한다. 
+    - router, redux(context-api), graphql, applo...
+    - 컴포넌트화 개발에 원조
+    - create-reate-app : cli가 존재함. 하지만, controller, model.. 파일을 만들어주는 cli는 없음.
+    - 커뮤니티 : 다양한 예제소스 및 jquery to react 소스 변환 예제가 많다.
+- vue : 새로운 문법 자스크립트 같지만... js가 아니다.
+    - vue-cli 빠른 접근이 가능하나 응용하기 위해서는 각자의 노력이 필요하다.
+    - 공통모듈 개발을 도와주는 가이드 개발자가 있으면 수월하게 진행이 가능
+    - 예제소스가 없고, 쓸만한 라이브러리는 분석해서 컨버팅 해야 하는 어려움.
+- angular : 새로운 언어 typescript 공부를 해야 한다. 
+    - angular-cli 프레임워크 뼈대를 빠르게 만들수 있다. 
+    - 구조 자체가 웬만하게 잡혀 있다. 
+    - html + js + css 
+    - 컴포넌트화에 유리하다. 
+    - 예제소스는 다수 보유하고 있으나, 커스텀화 하는데 힘들지 않나...
+    
