@@ -25,6 +25,10 @@
     "*.tgz": "explorerExcludedFiles",
     ".yarn-integrity": "explorerExcludedFiles",
     ".env": "explorerExcludedFiles",
-    ".next": "explorerExcludedFiles"
+    ".next": "explorerExcludedFiles",
+    "node_modules/*": "explorerExcludedFiles",
+    "yarn.lock": "explorerExcludedFiles",
+    ".cache": "explorerExcludedFiles",
+    "dist/*": "explorerExcludedFiles"
   }
 }
