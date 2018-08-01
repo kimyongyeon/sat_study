@@ -4,7 +4,8 @@
   "description": "study ...",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "parcel --port 3000 index.html",
+    "build": "parcel build index.html -d build --public-url ./"
   },
   "repository": {
     "type": "git",
@@ -17,9 +18,17 @@
   },
   "homepage": "https://github.com/kimyongyeon/sat_study#readme",
   "dependencies": {
-    "express": "^4.16.3"
+    "autoprefixer": "^9.0.2",
+    "express": "^4.16.3",
+    "postcss-modules": "^1.3.2",
+    "react": "^16.4.1",
+    "react-dom": "^16.4.1",
+    "src": "^1.1.2",
+    "typography": "^0.16.17"
   },
   "devDependencies": {
-    "babel-cli": "^6.26.0"
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1"
   }
 }
