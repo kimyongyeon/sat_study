@@ -26,9 +26,29 @@ var home = {
     var list = this.model.dumyList()
     console.log(list)
 
+    this.ajax.list();
+
     console.log('결정적인 변화... 어떻게 줘야 하는가....')
     console.log('end')
   },
+  ajax: {
+    list: function() {
+      $.ajax({
+        url: "http://127.0.0.1:3000/list",
+      beforeSend: function( xhr ) {
+          xhr.overrideMimeType( "text/plain; charset=x-user-defined" );
+      }})
+      .done(function( data ) {
+          if ( console && console.log ) {
+              console.log(data);
+              // $("body").html(data);
+          }
+      });
+    },
+    reg: function() {},
+    edit: function() {},
+    remove: function() {}
+  },  
   uiDraw: function () {
     console.log('ui Draw called')
   },
@@ -79,5 +99,4 @@ var home = {
     $('#srcIndex').attr('src', $('#srcIndex').attr('src') + result)
   }
 }
-
-// window.fnHome = home;
+window.fnHome = home;
