@@ -1,26 +1,160 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Document</title>
+    <!-- <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"> -->
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <!-- <script src="home.js"></script> -->
     <style>
-        table tr td{
+        table tr td {
             border: 1px solid red;
             color: red;
             background: red;
             width: 100px;
             height: 200px;
             padding: 0px;
-            margin:0px;
+            margin: 0px;
         }
+
+        #wrap {
+            width: 90%;
+            margin: 0 auto;
+            border: 4px solid #000;
+        }
+
+        .snb { width: 225px; }
+        .snb h2 { text-align: right; padding:0 0 8px; font-size: 25px; color:#333; font-weight: normal; }
+        .snb li { border-top: 1px solid black; }
+        .snb li:first-child { border-top: none;}
+        .snb li a { display: block; height: 41px; line-height: 41px; text-indent: 10px; font-size: 14px; color: #333;}
+        .snb li a:hover { background: #f5f5f5; }
+        .snb ul { border-top: 8px solid #323232; border-bottom: 1px solid #123312; margin-bottom: 20px;}
+
+        .notice > div { width: 1180; margin: 0 auto; padding: 55px 0;}
+        .notice > div .top > ul a { display: block; width: 280px; height: 280px; text-align: center; box-sizing: border-box; font-size: 17px; color:#000;}
+        .notice > div .top > ul li { float: left;}
+
     </style>
-    
+
 </head>
+
 <body>
-    <!-- <div id="app"></div>
-    <script src="./src/Index.js"></script> -->
+    <ul>
+        <li><a href="">블럭요소는 width는 100% </a></li>
+        <li><a href="">가로/세로 를 줄수있다. </a></li>
+    </ul>
+    <h2>블럭요소 안에 블럭요소를 넣을 수 없다. </h2>
+    <h1></h1><address></address><p></p>
+    <hr>
+    <h2>인라인요소 / 블럭요소 </h2>
+    <div style="border: 1px solid black; height:20px;">
+        <h2>인라인 요소 </h2>
+        <a href="#"></a>
+        <span></span>
+        <img src="#" alt="">
+    </div>
+    <div style="border: 1px solid black; height:20px;"></div>
+    <div style="border: 1px solid black; height:20px;"></div>
+
+    <section class="notice">
+        <div>
+            <div class="top">
+                <ul>
+                    <li><a href="#">테마갤러리 </a></li>
+                    <li><a href="#">블로그 </a></li>
+                    <li><a href="#">대리점찾기  </a></li>
+                </ul>
+                <div>
+                    <h2>제품찾기</h2>
+                    <div>
+                        <select name="" id="" title="검색조건 선택">
+                            <option value="">제품 전체검색</option>
+                        </select>
+                    </div>
+                    <div>
+                        <input type="search" title="모델명 입력" placeholder="모델명을 입력하세요.">
+                    </div>
+                    <div><a href="#">검색하기</a></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="snb">
+        <h2>ul 메뉴</h2>
+        <ul>
+            <li><a href="#a1">1</a></li>
+            <li><a href="#a2">2</a></li>
+            <li><a href="#a3">3</a></li>
+            <li><a href="#a4">4</a></li>
+            <li><a href="#a5">5</a></li>
+        </ul>
+    </div>
+
+    <div id="wrap">
+    <h1>뚜벅이</h1>
+</div>
+
+    <!-- <div class="w3-container">
+        <h1>Hover Colors</h1>
+
+        <p>Change the background color when hovering over an element:</p>
+        <div class="w3-container w3-orange w3-hover-red">
+            <h2>London</h2>
+            <p>London is the most populous city in the United Kingdom, with a metropolitan area of over 9 million inhabitants.</p>
+        </div>
+
+    </div>
+
+    <div class="w3-container">
+        <h1>Text Colors</h1>
+        <p>The w3-text-color classes defines text colors for HTML elements:</p>
+
+        <div class="w3-text-red">
+            <h2>London</h2>
+            <p>London is the most populous city in the United Kingdom, with a metropolitan area of over 9 million inhabitants.</p>
+        </div>
+
+        <div class="w3-text-blue">
+            <h2>London</h2>
+            <p>London is the most populous city in the United Kingdom, with a metropolitan area of over 9 million inhabitants.</p>
+        </div>
+    </div>
+
+    <div class="w3-container">
+        <h1>Background Colors</h1>
+        <p>The w3-color classes defines background colors for HTML elements:</p>
+    </div>
+
+    <div class="w3-container w3-red">
+        <h2>London</h2>
+        <p>London is the most populous city in the United Kingdom, with a metropolitan area of over 9 million inhabitants.</p>
+    </div>
+
+    <div class="w3-container w3-teal">
+        <h2>London</h2>
+        <p>London is the most populous city in the United Kingdom, with a metropolitan area of over 9 million inhabitants.</p>
+    </div>
+
+    <div class="w3-container w3-yellow">
+        <h2>London</h2>
+        <p>London is the most populous city in the United Kingdom, with a metropolitan area of over 9 million inhabitants.</p>
+    </div>
+
+    <div class="w3-container w3-gray">
+        <h2>London</h2>
+        <p>London is the most populous city in the United Kingdom, with a metropolitan area of over 9 million inhabitants.</p>
+    </div>
+
+    <div class="w3-container w3-grey">
+        <h2>London</h2>
+        <p>London is the most populous city in the United Kingdom, with a metropolitan area of over 9 million inhabitants.</p>
+    </div> -->
+
+    <div id="app"></div>
+    <script src="./src/Index.js"></script>
 
     <!-- <div id="content-wrapper">
         <div id="header">
@@ -83,7 +217,7 @@
 
     // CRUD
     // C: create 생성
-    function fnCreate(){
+    function fnCreate() {
         console.log("create called");
     }
     // R: read 읽기
@@ -94,19 +228,19 @@
     // D: delete 삭제
 
     // server : 
-        // - 등록 : insert => insName, insPhone
-        // - 수정 : update => upName, upPhone
-        // - 삭제 : delete => delName, delPhone
-        // - 읽기 : select => selName, selPhone
+    // - 등록 : insert => insName, insPhone
+    // - 수정 : update => upName, upPhone
+    // - 삭제 : delete => delName, delPhone
+    // - 읽기 : select => selName, selPhone
     // front :
-        // - 등록 : regist => regName, regPhone
-        // - 수정 : edit => edName, edPhone
-        // - 삭제 : remove => reName, rePhone
-        // - 읽기 : read => reName, rePhone 
-        
+    // - 등록 : regist => regName, regPhone
+    // - 수정 : edit => edName, edPhone
+    // - 삭제 : remove => reName, rePhone
+    // - 읽기 : read => reName, rePhone 
+
     // 상수
     const IP = "123.123.123.123";
-    var memberNamePhoneAddr="";
+    var memberNamePhoneAddr = "";
 
     var member = {
         name: '철수',
@@ -117,8 +251,8 @@
     // 이벤트 거는 방식 2가지 
     // 1. jquery event listner 
     // 2. onclick 함수
-    
-    $("#btnInit").on("click", function(e) {
+
+    $("#btnInit").on("click", function (e) {
         alert("초기화 합니다.");
         console.log("초기화");
         $("#in_name").val('');
@@ -126,16 +260,16 @@
         $("#in_addr").val('');
     });
 
-    $("#btnRemove").on("click", function(e) {
+    $("#btnRemove").on("click", function (e) {
         e.preventDefault();
         var list = $("input:checked");
-        list.each(function(i, d) {
+        list.each(function (i, d) {
             var id = $(d).parent().parent().parent().parent().parent().attr("id");
             $("#" + id).remove();
         });
     });
 
-    $("#btnSend").on("click", function(e) {
+    $("#btnSend").on("click", function (e) {
         e.preventDefault();
         alert("전송 합니다.");
         // console.log("전송");
@@ -153,7 +287,7 @@
 
     });
 
-    $("#btnEdit").on("click", function(e) {
+    $("#btnEdit").on("click", function (e) {
         e.preventDefault();
         // alert("수정중 입니다.");
         // console.log($("input[type=checkbox]"));
@@ -162,7 +296,7 @@
             alert("하나 만 선택하고 수정 바랍니다.");
             return;
         }
-        list.each(function(i, d) {
+        list.each(function (i, d) {
             // i : index
             // d : data
             // console.log(i, d); 
@@ -192,7 +326,7 @@
         // alert("onclick하셨습니다.");
         var name = $("#in_name").val();
         var phone = $("#in_phone").val();
-        var addr  = $("#in_addr").val();
+        var addr = $("#in_addr").val();
 
         if (name === "") {
             alert("이름을 입력하세요.");
@@ -211,7 +345,7 @@
         }
         function guid() {
             function s4() {
-            return ((1 + Math.random()) * 0x10000 | 0).toString(16).substring(1);
+                return ((1 + Math.random()) * 0x10000 | 0).toString(16).substring(1);
             }
             return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
         }
@@ -261,7 +395,7 @@
     array.push(3);
 
     var htmlBody = "";
-    for(var i=0; i<array.length; i++) {
+    for (var i = 0; i < array.length; i++) {
         console.log("i ==> " + array[i]);
         htmlBody += `
             <tr><td>${i}번째 사람입니다.</td></tr>        
