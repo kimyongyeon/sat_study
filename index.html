@@ -74,10 +74,36 @@
 
     </style>
 
+    <script>
+
+    let aFun1 = async (message) => {
+        setTimeout(()=> {
+            console.log('fn-1', message);
+        }, 1000);
+    }
+    
+    let aFun2 = async (message) => {
+        setTimeout(()=> {
+            console.log('fn-2', message);
+        }, 500);
+    }
+
+    async function fnMain() {
+        let fn1 = await aFun1('hello');
+        let fn2 = await aFun2('world');
+        console.log(fn1, fn2);
+    }
+    console.log("fnMain() start");
+    fnMain();
+
+    </script>
+
 </head>
 
 <body>
-
+    <ul>
+        <li><a href="join.html">회원가입</a></li>
+    </ul>
     <a href="#pop1" class="btn">팝업열기</a>
     <div class="popup" id="pop1">
         <a href="#a">닫기</a>
@@ -255,7 +281,7 @@
     !-->
 
 </body>
-<script id="srcIndex" src="index.js?c=23"></script>
+<!-- <script id="srcIndex" src="index.js?c=23"></script>
 <script>
     fnHome.init();
     // home.destroy();
@@ -457,6 +483,6 @@
     // name, phone, addr
     // $("#myName").text("영희");
 
-</script>
+</script> -->
 
 </html>
