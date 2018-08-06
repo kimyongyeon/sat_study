@@ -18,17 +18,7 @@ export default class App extends Component {
     }   
     return (
       <Fragment>
-        <Header />
-        <h1>react 공부하기.</h1>
-        <BinClock />
-        <Clock />
-        <p>{this.props.elem}</p>
-        <ul>
-          <li>리엑트환경설정 {name}</li>
-          <li>리엑트문법 <img style={style} src={imgAddr} alt='이미지입니다.'/></li>
-          <li>리엑트-프로젝트실전</li>
-        </ul>
-        <Footer />
+
       </Fragment>
     )
   }

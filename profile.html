@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html>
+<title>W3.CSS Template</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto'>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<style>
+html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
+form { opacity: 0; display: none; }
+form:target { opacity: 1; display: block;}
+</style>
+<script>
+
+    $(function(){
+
+        var App = {
+            works: [],
+            model: function() {
+                var workExper = {}
+                workExper = {
+                    title: '웹 개발자 / 신규 삼성물산 빅데이터 시각화 대시보드',
+                    date: '2017.11 - 2018.07',
+                    cor: '주관: 핑고리',
+                    skill: '주요스킬: nodejs, springboot, java, express, freemarker, highchart, sso, mybatis, python, aws api, mysql',
+                    work: '주요업무: 공통모듈개발/기능서비스개발/프론트개발/소스관리/배포/DB쿼리개발/배치개발/차트개발, css제외'
+                }
+                this.works.push(workExper);
+                workExper = {
+                    title: '서버개발자 / 신규 모바일웹 게임 서버 ',
+                    date: '2017.01 ~ 2017.10',
+                    cor: '주관: x8tech 주관',
+                    skill: '주요스킬: nodejs, socket.io, express, ejs, phaser.js, reactjs, angular2, mysql',
+                    work: '주요업무: 공통모듈개발/기능서비스개발/프론트개발/소스관리/배포/DB설계,개발 css제외'
+                }
+                this.works.push(workExper);
+                workExper = {
+                    title: '웹 개발자 / 신규 지방의회 모니터링 대시보드 시스템  ',
+                    date: '2016.04 ~ 2016.12',
+                    cor: '주관: 국회도서관 주관',
+                    skill: '주요스킬: Springboot, vuejs, mybatis, jquery, highchart, java1.8, tomcat8, oracle',
+                    work: '주요업무: 공통모듈개발/기능서비스개발/프론트개발/소스관리/배포/DB쿼리개발/차트개발, css제외'
+                }
+                this.works.push(workExper);
+                workExper = {
+                    title: '웹 개발자 / 차세대 KT-LMS 시스템  ',
+                    date: '2016.02 ~ 2016.03',
+                    cor: '주관: KT',
+                    skill: '주요스킬: Spring3.2, mybatis, jquery, java, postgre',
+                    work: '주요업무: 기능서비스개발/프론트개발/DB쿼리개발, css제외'
+                }
+                this.works.push(workExper);
+                workExper = {
+                    title: '웹 개발자 / 신규 빅데이터 시각화 대시보드  ',
+                    date: '2015.06 ~ 2016.01',
+                    cor: '주관: SK Planet',
+                    skill: '주요스킬: spring 4.0, mybatis, jquery, echart, java, oracle, bootstrap',
+                    work: '주요업무: 공통모듈개발/기능서비스개발/프론트개발/소스관리/배포/DB쿼리개발/차트개발, css제외'
+                }
+                this.works.push(workExper);
+                workExper = {
+                    title: '웹 개발자 / 차세대 아카이빙 서비스 프로젝트  ',
+                    date: '2015.01 ~ 2015.05',
+                    cor: '주관: 신라호텔',
+                    skill: '주요스킬: occam, orm framework, angularjs1.3, jquery, java, jpa, oracle, solar, c#',
+                    work: '주요업무: 공통모듈개발/기능서비스개발/프론트개발/DB쿼리개발/윈도우프로그램개발, css제외'
+                }
+                this.works.push(workExper);
+                workExper = {
+                    title: '웹 개발자 / SKMS 시스템 성능부하 테스트 시뮬레이션 프로젝트   ',
+                    date: '2014.07 ~ 2014.12',
+                    cor: '주관: 삼성전자',
+                    skill: '주요스킬: anyframework, hibernate, javascript, jquery, java, oracle',
+                    work: '주요업무: DB쿼리개발/RestAPI개발, css제외'
+                }
+                this.works.push(workExper);
+                workExper = {
+                    title: '웹 개발자 / 신규 모아카드   ',
+                    date: '2014.03 ~ 2014.06',
+                    cor: '주관: 모아카드',
+                    skill: '주요스킬: java, spring3',
+                    work: '주요업무: 프론트개발/백앤드개발/DB쿼리개발/RestAPI개발, css제외'
+                }
+                this.works.push(workExper);
+                workExper = {
+                    title: '웹 개발자 / 차세대 알리안츠생명 차세대 프로젝트    ',
+                    date: '2013.04 ~ 2014.01',
+                    cor: '주관: 알리안츠생명',
+                    skill: '주요스킬: java, anyframework, oracle',
+                    work: '주요업무: 프론트개발/백앤드개발/DB쿼리개발/회계업무, css제외'
+                }
+                this.works.push(workExper);
+                workExper = {
+                    title: '웹 개발자 / 차세대 아주렌트카 홈페이지  ',
+                    date: '2013.01 ~ 2013.03',
+                    cor: '주관: 아주렌트카',
+                    skill: '주요스킬: java, spring3, oracle',
+                    work: '주요업무: 프론트개발/백앤드개발/DB쿼리개발, css제외'
+                }
+                this.works.push(workExper);
+                workExper = {
+                    title: '웹 개발자 / 차세대 한국진흥공단 홈페이지  ',
+                    date: '2012.08 ~ 2012.12',
+                    cor: '주관: 한국체육진흥공단',
+                    skill: '주요스킬: java, spring3, oracle',
+                    work: '주요업무: 프론트개발/백앤드개발/DB쿼리개발, css제외'
+                }
+                this.works.push(workExper);
+                workExper = {
+                    title: '웹 개발자 / 신규 EC21 다국어 홈페이지    ',
+                    date: '2012.05 ~ 2012.07',
+                    cor: '주관: EC21',
+                    skill: '주요스킬: java, struts, oracle',
+                    work: '주요업무: 프론트개발/백앤드개발/DB쿼리개발, css제외'
+                }
+                this.works.push(workExper);
+                workExper = {
+                    title: '웹 개발자 / 신규 SK C&C NOBS 프로젝트    ',
+                    date: '2011.12 ~ 2012.04',
+                    cor: '주관: SK C&C',
+                    skill: '주요스킬: java, spring3, oracle',
+                    work: '주요업무: 프론트개발/백앤드개발/DB쿼리개발, css제외'
+                }
+                this.works.push(workExper);
+            },
+            uiInit: function() {
+                
+                var html = "";
+                var works = this.works;
+                $.each(works, (idx, i) => {
+                    html += `
+                    <div class="w3-container">
+                        <h5 class="w3-opacity"><b>${i.title} </b></h5>
+                        <h6 class="w3-text-teal"><i class="fa fa-calendar fa-fw w3-margin-right"></i>${i.date}</h6>
+                        <p>${i.cor}</p>
+                        <p>${i.skill}</p>
+                        <p>${i.work}</p>
+                        <hr>
+                    </div>
+                    `;
+                });
+                $("#workList").empty();
+                $("#workList").html(html);
+            },
+            init: function() {
+                console.log("init called");
+                this.model();
+                this.uiInit();
+                var self = this;
+                $("#reg_add").on("click", function(){
+                    // alert("add");
+                    var title = $("#txt_title").val();
+                    var from = $("#txt_from").val();
+                    var to = $("#txt_to").val();
+                    var corp = $("#txt_corp").val();
+                    var skill = $("#txt_skill").val();
+                    var work = $("#txt_work").val();
+                    var workExper = {
+                        title: title,
+                        date: `${from} - ${to}`,
+                        cor: '주관: ' + corp,
+                        skill: '주요스킬: ' + skill,
+                        work: '주요업무: ' + work
+                    };
+                    self.works.push(workExper);  
+                    self.uiInit();
+                })
+            }   
+        }
+        App.init();
+    // reg_add
+    })
+    
+</script>
+<body class="w3-light-grey">
+
+<!-- Page Container -->
+<div class="w3-content w3-margin-top" style="max-width:1400px;">
+
+    <form action="/input" id="reg_profile" class="w3-container">
+        <table class="w3-table">
+            <colgroup>
+                <col style="width: 180px;">
+                <col>
+            </colgroup>
+            <tr>
+                <td><label>제목</label></td>
+                <td><input id="txt_title" class="w3-input w3-border" type="text" placeholder="제목" title="제목"></td>
+            </tr>
+            <tr>
+                <td>일자</td>
+                <td>
+                    <input id="txt_from" class="w3-input" type="text" placeholder="시작일" title="시작일"> - 
+                    <input id="txt_to" class="w3-input" type="text" placeholder="종료일" title="종료일">
+                </td>
+            </tr>
+            <tr>
+                <td>주관</td>
+                <td><input id="txt_corp" class="w3-input" type="text" placeholder="주관" title="주관"></td>
+            </tr>
+            <tr>
+                <td>주요스킬</td>
+                <td><input id="txt_skill" class="w3-input" type="text" placeholder="주요스킬" title="주요스킬"></td>
+            </tr>
+            <tr>
+                <td>주요업무</td>
+                <td><input id="txt_work" class="w3-input" type="text" placeholder="주요업무" title="주요업무"></td>
+            </tr>
+            
+        </table>
+        <a href="#" class="w3-button w3-black">닫기</a>
+        <a href="#" class="w3-btn w3-black" id="reg_add">추가</a>
+    </form>
+
+  <!-- The Grid -->
+  <div class="w3-row-padding">
+  
+    <!-- Left Column -->
+    <div class="w3-third">
+
+
+    
+      <div class="w3-white w3-text-grey w3-card-4">
+        <div class="w3-display-container">
+          <img src="pic.jpg" style="width:100%" alt="kimyongyeon">
+          <div class="w3-display-bottomleft w3-container w3-text-black">
+            <h2>kimyongyeon</h2>
+          </div>
+        </div>
+        <div class="w3-container">
+          <p><i class="fa fa-briefcase fa-fw w3-margin-right w3-large w3-text-teal"></i>developer</p>
+          <p><i class="fa fa-home fa-fw w3-margin-right w3-large w3-text-teal"></i>Seoul, Korea</p>
+          <p><i class="fa fa-envelope fa-fw w3-margin-right w3-large w3-text-teal"></i>toyongyeon@gmail.com</p>
+          <p><i class="fa fa-phone fa-fw w3-margin-right w3-large w3-text-teal"></i>010-7731-5356</p>
+          <hr>
+
+          <p class="w3-large"><b><i class="fa fa-asterisk fa-fw w3-margin-right w3-text-teal"></i>Framework</b></p>
+          <p>Springboot</p>
+          <div class="w3-light-grey w3-round-xlarge w3-small">
+            <div class="w3-container w3-center w3-round-xlarge w3-teal" style="width:100%">100%</div>
+          </div>
+          <p>express</p>
+          <div class="w3-light-grey w3-round-xlarge w3-small">
+            <div class="w3-container w3-center w3-round-xlarge w3-teal" style="width:100%">
+              <div class="w3-center w3-text-white">100%</div>
+            </div>
+          </div>
+          <br>
+          <p class="w3-large w3-text-theme"><b><i class="fa fa-globe fa-fw w3-margin-right w3-text-teal"></i>Language</b></p>
+          <p>Java</p>
+          <div class="w3-light-grey w3-round-xlarge">
+            <div class="w3-round-xlarge w3-teal" style="height:24px;width:100%"></div>
+          </div>
+          <p>javascript</p>
+          <div class="w3-light-grey w3-round-xlarge">
+            <div class="w3-round-xlarge w3-teal" style="height:24px;width:100%"></div>
+          </div>
+          <p>nodejs</p>
+          <div class="w3-light-grey w3-round-xlarge">
+            <div class="w3-round-xlarge w3-teal" style="height:24px;width:100%"></div>
+          </div>
+          <br>
+        </div>
+      </div><br>
+
+    <!-- End Left Column -->
+    </div>
+
+    <!-- Right Column -->
+    <div class="w3-twothird">
+      <div class="w3-container w3-card w3-white w3-margin-bottom">
+            <a href="#reg_profile"  class="w3-btn w3-black">경력입력</a>
+        <h2 class="w3-text-grey w3-padding-16"><i class="fa fa-suitcase fa-fw w3-margin-right w3-xxlarge w3-text-teal"></i>Work Experience</h2>
+        <div id="workList">
+        </div>
+      </div>
+
+      <div class="w3-container w3-card w3-white">
+        <h2 class="w3-text-grey w3-padding-16"><i class="fa fa-certificate fa-fw w3-margin-right w3-xxlarge w3-text-teal"></i>Education</h2>
+        <div class="w3-container">
+          <h5 class="w3-opacity"><b>순천대학교</b></h5>
+          <h6 class="w3-text-teal"><i class="fa fa-calendar fa-fw w3-margin-right"></i>2009 - 2011</h6>
+          <p>3.5 / 졸업</p>
+          <hr>
+        </div>
+        <div class="w3-container">
+          <h5 class="w3-opacity"><b>순천제일대학</b></h5>
+          <h6 class="w3-text-teal"><i class="fa fa-calendar fa-fw w3-margin-right"></i>2001 - 2007</h6>
+          <p>3.5 / 졸업</p>
+          <hr>
+        </div>
+        <div class="w3-container">
+          <h5 class="w3-opacity"><b>순천 금당고등학교</b></h5>
+          <h6 class="w3-text-teal"><i class="fa fa-calendar fa-fw w3-margin-right"></i>1998 - 2001</h6>
+          <p>졸업</p><br>
+        </div>
+      </div>
+
+    <!-- End Right Column -->
+    </div>
+    
+  <!-- End Grid -->
+  </div>
+  
+  <!-- End Page Container -->
+</div>
+
+<footer class="w3-container w3-teal w3-center w3-margin-top">
+  <p>찾아주시면 정성껏 내 사이트처럼 완성해 드립니다.</p>
+  <i class="fa fa-facebook-official w3-hover-opacity"></i>
+  <i class="fa fa-instagram w3-hover-opacity"></i>
+  <i class="fa fa-snapchat w3-hover-opacity"></i>
+  <i class="fa fa-pinterest-p w3-hover-opacity"></i>
+  <i class="fa fa-twitter w3-hover-opacity"></i>
+  <i class="fa fa-linkedin w3-hover-opacity"></i>
+  <p>Powered by <a href="http://kyy82.cafe24.com" target="_blank">kimyongyeon</a></p>
+</footer>
+
+
+
+
+</body>
+</html>
