@@ -1,0 +1,9 @@
+[
+    {
+        title: '웹 개발자 / 신규 삼성물산 빅데이터 시각화 대시보드',
+        date: '2017.11 - 2018.07',
+        cor: '주관: 핑고리',
+        skill: '주요스킬: nodejs, springboot, java, express, freemarker, highchart, sso, mybatis, python, aws api, mysql',
+        work: '주요업무: 공통모듈개발/기능서비스개발/프론트개발/소스관리/배포/DB쿼리개발/배치개발/차트개발, css제외'
+    }
+]
