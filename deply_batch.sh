@@ -90,7 +90,7 @@ declare -f 함수이름
 
 #반복문
 #지정된 범위 안에서 반복문 필요 시 좋음
-for string in "hello" "world" "..."; do;
+for string in "hello" "world" "..."; do
     echo ${string};
 done
 
