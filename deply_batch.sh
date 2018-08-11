@@ -144,7 +144,7 @@ for string in "HELL" "WORLD" "hello" "world" "s" "start" "end" "etc"; do
             echo "${string}: s 혹은 start 일때"
             ;;
         *)
-            echo "${string}: 기타 "
+            echo "${string}: 기타    "
             ;;
     esac
 done 
