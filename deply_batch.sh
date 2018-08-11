@@ -41,4 +41,7 @@ export hello_world="hello world..."
 /home/export_test.sh
 
 #환경변수를 테스트하기 위해 export_test.sh 파일을 만들고 선언한 변수를 확인해 본다. 
-echo ${hello_world}
+echo ${hello_world} @@@@
+
+# 이것도 겹치나 보자 .
+
