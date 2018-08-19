@@ -14,6 +14,10 @@
         table tr td {
             border: 1px solid black;
         }
+
+        table tbody tr td label {
+            display: block;
+        }
     </style>
 </head>
 <body>
@@ -29,8 +33,12 @@
         <input id="btn_cancel" type="button" value="취소">
     </form>
     <table id="tbl_member_list" >
+        <colgroup>
+            <col width="50px;">
+        </colgroup>
         <thead>
             <tr>
+                <td>구분</td>
                 <td>이름</td>
                 <td>성별</td>
                 <td>나이</td>
@@ -38,6 +46,7 @@
         </thead>
         <tbody>
             <tr>
+                <td><label for="memberSeq"><input id="memberSeq" type="checkbox"></label></td>
                 <td>영수</td>
                 <td>남</td>
                 <td>100</td>
@@ -46,55 +55,168 @@
     </table>
     <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
     <script>
-        var member = {
+        // -----------------------------------------
+        // 되도록 아래같이는 쓰지 않는것이 좋다. 
+        // -----------------------------------------
+        // var member = {
+        //         name: '',
+        //         sex: '',
+        //         age: ''
+        //     };
+        // var members = [];
+
+        // -----------------------------------------
+        // VO : 엔티티 객체 레이어 
+        // -----------------------------------------
+        var MemberVO = function() {
+            this.member = {
+                seq: '', 
                 name: '',
                 sex: '',
                 age: ''
             };
-        var members = [];
+            this.members = [];
+        }
+        // -----------------------------------------
+        // DAO : 데이터 엑세스 레이어 
+        // -----------------------------------------
+        var MemberDAO = function() {
+            this.save = function(key, data) {
+                try {
+                    localStorage.setItem(key, data);
+                } catch (e) {
+                    console.log(e);
+                    return 0;
+                }
+                return 1;
+            }
+            this.read = function(key) {
+                return localStorage.getItem(key);
+            }
+            this.delete = function(key) {
+                try {
+                    localStorage.removeItem(key);
+                } catch (e) {
+                    console.log(e);
+                    return 0;
+                }
+                return 1;
+                
+            }
+            this.update = function(key, data) {
+                try {
+                    localStorage.setItem(key, data);
+                } catch (e) {
+                    console.log(e);
+                    return 0;
+                }
+                return 1;
+            }
+        }
         
         $(function() {
+
+            var memberVO = new MemberVO();
+            var memberDao = new MemberDAO();
+
+            fnInit ();
+
+            function fnInit () {
+                // 회원정보 읽기
+                memberVO.members = JSON.parse(memberDao.read("members"));
+                drawTable();
+            }
+
             // 회원정보 추가 
             function fnAddMember(member) {
-                this.members.push(member); // 배열 추가 
-                return this.members.length;
+
+                // TODO: 중복체크 필요 또는 자료구조를 SET으로 지정해서 해결해야함.
+                memberVO.members.push(member);
+                return memberVO.members.length;
+                // this.members.push(member); // 배열 추가 
+                // return this.members.length;
             }
 
             // 회원정보 목록확인 출력
             function fnPrintMembers() {
-                this.members.map((i) => {
+
+                memberVO.map( i => {
                     console.log(`name:${i.name}, sex:${i.sex}, age:${i.age}`);
                 });
+                // this.members.map((i) => {
+                //     console.log(`name:${i.name}, sex:${i.sex}, age:${i.age}`);
+                // });
+            }
+
+            // 컨트롤러 
+            function fnController () {
+                addData();
+                drawTable();
             }
 
             //alert(1);
+
+            // 회원정보 입력 
             function addData () {
                 var $name = $("#input_name").val();
                 var $sex = $("#input_sex").val();
                 var $age = $("#input_age").val();
                 console.log(`name=${$name}, sex=${$sex}, age=${$age}`);
                 // console.log("name=" + $name + ", sex=" + $sex + ", age=" + $age);
-                var member = {};
-                member.name = $name;
-                member.sex = $sex;
-                member.age = $age;
+                // var member = {};
 
-                console.log(`member=${JSON.stringify(member)}`);
-                var memberLength = fnAddMember(member);
-                console.log("memberLength=", memberLength); // 길이 
-                console.log("members", this.members); // 배열 
+                // seq create 
+                function guid() {
+                    function s4() {
+                        return Math.floor((1 + Math.random()) * 0x10000)
+                        .toString(16)
+                        .substring(1);
+                    }
+                    return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
+                }
+
+                memberVO.member = {};
+                memberVO.member.seq = guid();
+                memberVO.member.name = $name;
+                memberVO.member.sex = $sex;
+                memberVO.member.age = $age;
+                console.log(`member=${JSON.stringify(memberVO.member)}`);
+                var result = fnAddMember(memberVO.member);
+                console.log("memberLength=", result); // 회원정보 개수 
+                if (result > 0) {
+                    console.log("push success!");
+                } else {
+                    console.log("push fail!");
+                }
+                // var memberLength = fnAddMember(member);
+                // console.log("memberLength=", memberLength); // 길이 
+                // console.log("members", this.members); // 배열 
             }
 
             function drawTable() {
-                //$("#tbl_member_list tbody").empty(); // 초기화 
+                $("#tbl_member_list tbody").empty(); // 초기화 
                 var trHtml = "";
-                trHtml += `
-                    <tr>
-                        <td>홍길동</td>
-                        <td>남자</td>
-                        <td>30</td>
-                    </tr>
-                `;
+                // var memLen = memberVO.members.length;
+                // for (var i=0; i<memLen; i++) {
+                //     var m = memberVO.members[i];
+                //     trHtml += `
+                //         <tr>
+                //             <td>${m.name}</td>
+                //             <td>${m.sex}</td>
+                //             <td>${m.age}</td>
+                //         </tr>
+                //     `;
+                // }
+                memberVO.members.map(i => {
+                    trHtml += `
+                        <tr>
+                            <td><label for="chk_${i.seq}"><input id="chk_${i.seq}" type="checkbox"></label></td>
+                            <td>${i.name}</td>
+                            <td>${i.sex}</td>
+                            <td>${i.age}</td>
+                        </tr>
+                    `;
+                });
                 // this.members => loop(for, for in, map) 
                 // 과제: 8/18 append 
                 $("#tbl_member_list tbody").append(trHtml);
@@ -108,21 +230,88 @@
                 // 3. 화면에 표시를 해야 함.
             }
             // 과제: 8/18 구현을 못해도 되나 생각은 해봐라 어떻게 해야 할지?
-            function fnRemove() {}
+            function fnRemove() {
+
+            }
 
             // 저장 
             $("#btn_save").on("click", function() {
-            
+                var result = memberDao.save("members", JSON.stringify(memberVO.members));
+                if (result > 0) {
+                    console.log("db save success, " + JSON.stringify(memberVO.members));
+                } else {
+                    console.log("db save fail");
+                }
             });
 
             // 추가 
             $("#btn_add").on("click", function() {
-                addData(); // model 
-                drawTable();// view
+                fnController();
             });
 
             // 객체지향 스타일로 한번변형 생각 ?????? [hint: object(객체)]
+            var MemberApp = {
+                init: (self) => {
+                    // 앱초기화 
+                    self.app(self);
+                },
+                app: (self) => {
 
+
+                    console.log(self);
+                    
+                    // 업무 로직
+                    var list = self.dao.select({});
+                    var member = self.member;
+                    member.setName(self.vo.input_name);
+                    member.setSex(self.vo.input_sex);
+                    member.setAge(self.vo.input_age);
+
+                    self.vo.members.push({
+                        name: member.getName(),
+                        sex: member.getSex(),
+                        age: member.getAge(),
+                    });
+
+                    // 화면표시 4:46
+                    var list = self.vo.members;
+                    self.ui(list);
+                },
+                ui: (list) => {
+                    // 프레젠테이션 레이어: 화면표시
+                    var html = "";
+                    list.map( item => {
+                        html += `<div>${item.name},${item.sex},${item.age} </div>`
+                    });
+                    $('body').append(html);
+                },
+                dao: {
+                    select: (where) => {
+                        var list = [1,2,3,4];
+                        return list;
+                    },
+                    insert:  (member) => {},
+                    update:  (member) => {},
+                    delete:  (key) => {},
+                },
+                member: {
+                    // 엔티티 객체
+                    setName: (val) => {this.name = val; },
+                    setSex: (val) => {this.sex = val; },
+                    setAge: (val) => {this.age = val; },
+                    getName: () => {return this.name },
+                    getSex: () => {return this.sex },
+                    getAge: () => {return this.age },
+                },
+                vo: { // 값 객체 
+                    members: [],
+                    input_name: $("#input_name").val() || '영수',
+                    input_sex: $("#input_sex").val() || '남',
+                    input_age: $("#input_age").val() || '33',
+                }
+            }
+
+            MemberApp.init(MemberApp);
 
         });
 
