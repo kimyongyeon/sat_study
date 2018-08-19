@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>CRUD</title>
+    <style>
+        table {
+            margin-top: 15px;
+            border: 1px solid black;
+            width: 500px;
+        }
+        table tr td {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+    <!-- 입력폼 -->
+    <form action="">
+        <input id="input_name" type="text" placeholder="이름 ">
+        <input id="input_sex" type="text" placeholder="성별 ">
+        <input id="input_age" type="text" placeholder="나이 ">
+        <input id="btn_save" type="button" value="저장">
+        <input id="btn_add" type="button" value="추가">
+        <input id="btn_edit" type="button" value="수정">
+        <input id="btn_remove" type="button" value="삭제">
+        <input id="btn_cancel" type="button" value="취소">
+    </form>
+    <table id="tbl_member_list" >
+        <thead>
+            <tr>
+                <td>이름</td>
+                <td>성별</td>
+                <td>나이</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>영수</td>
+                <td>남</td>
+                <td>100</td>
+            </tr>
+        </tbody>
+    </table>
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script>
+        var member = {
+                name: '',
+                sex: '',
+                age: ''
+            };
+        var members = [];
+        
+        $(function() {
+            // 회원정보 추가 
+            function fnAddMember(member) {
+                this.members.push(member); // 배열 추가 
+                return this.members.length;
+            }
+
+            // 회원정보 목록확인 출력
+            function fnPrintMembers() {
+                this.members.map((i) => {
+                    console.log(`name:${i.name}, sex:${i.sex}, age:${i.age}`);
+                });
+            }
+
+            //alert(1);
+            function addData () {
+                var $name = $("#input_name").val();
+                var $sex = $("#input_sex").val();
+                var $age = $("#input_age").val();
+                console.log(`name=${$name}, sex=${$sex}, age=${$age}`);
+                // console.log("name=" + $name + ", sex=" + $sex + ", age=" + $age);
+                var member = {};
+                member.name = $name;
+                member.sex = $sex;
+                member.age = $age;
+
+                console.log(`member=${JSON.stringify(member)}`);
+                var memberLength = fnAddMember(member);
+                console.log("memberLength=", memberLength); // 길이 
+                console.log("members", this.members); // 배열 
+            }
+
+            function drawTable() {
+                //$("#tbl_member_list tbody").empty(); // 초기화 
+                var trHtml = "";
+                trHtml += `
+                    <tr>
+                        <td>홍길동</td>
+                        <td>남자</td>
+                        <td>30</td>
+                    </tr>
+                `;
+                // this.members => loop(for, for in, map) 
+                // 과제: 8/18 append 
+                $("#tbl_member_list tbody").append(trHtml);
+
+            }
+            
+            // 과제: 8/18 구현을 못해도 되나 생각은 해봐라 어떻게 해야 할지?
+            function fnEdit() {
+                // 1. 배열중에 유일한 key를 잡아야 함.
+                // 2. 키값으로 배열중에서 값을 찾아야 함.
+                // 3. 화면에 표시를 해야 함.
+            }
+            // 과제: 8/18 구현을 못해도 되나 생각은 해봐라 어떻게 해야 할지?
+            function fnRemove() {}
+
+            // 저장 
+            $("#btn_save").on("click", function() {
+            
+            });
+
+            // 추가 
+            $("#btn_add").on("click", function() {
+                addData(); // model 
+                drawTable();// view
+            });
+
+            // 객체지향 스타일로 한번변형 생각 ?????? [hint: object(객체)]
+
+
+        });
+
+    </script>
+</body>
+</html>

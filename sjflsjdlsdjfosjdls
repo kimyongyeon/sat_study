@@ -1,0 +1,435 @@
+[33mcommit 4ba0e803ec41c4f2cb25636cb263950cbd1763b4[m
+Author:  <tonyspark@DESKTOP-MNM0QGF.localdomain>
+Date:   Sat Aug 11 12:41:14 2018 +0900
+
+    edit fixed test
+
+[33mcommit 9d620da4f5c6ed076b9eed9135c7c2e7382ed8c3[m
+Author:  <tonyspark@DESKTOP-MNM0QGF.localdomain>
+Date:   Sat Aug 11 12:39:40 2018 +0900
+
+    batch write eod fixed
+
+[33mcommit 612df40e7026c892f994d0c3d8138a811e55e2ee[m
+Merge: 2870e5f 4418e1b
+Author:  <tonyspark@DESKTOP-MNM0QGF.localdomain>
+Date:   Sat Aug 11 11:43:23 2018 +0900
+
+    last fixed
+
+[33mcommit 2870e5f8eb644739479134446741e2da46539475[m
+Author:  <tonyspark@DESKTOP-MNM0QGF.localdomain>
+Date:   Sat Aug 11 11:42:26 2018 +0900
+
+    myhome batch edit fixed
+
+[33mcommit 4418e1ba0f0e9db49cfca5782e13ab5ce48c157b[m
+Author: kimyongyeon <toyongyeon@gmail.com>
+Date:   Sat Aug 11 11:41:35 2018 +0900
+
+    normal fixed
+
+[33mcommit 76c574dcbd0641817e46eaf26d49a2b22f47f232[m
+Merge: a7aca9f d339aed
+Author:  <tonyspark@DESKTOP-MNM0QGF.localdomain>
+Date:   Sat Aug 11 11:39:42 2018 +0900
+
+    my pc home fixed
+
+[33mcommit a7aca9f3164d4fa416ed1dea8fa5207e9086eda4[m
+Author:  <tonyspark@DESKTOP-MNM0QGF.localdomain>
+Date:   Sat Aug 11 11:38:46 2018 +0900
+
+    home pc fixed
+
+[33mcommit d339aed22f9be3ead879ceb9cae0a4b59d10e53f[m
+Author: kimyongyeon <toyongyeon@gmail.com>
+Date:   Sat Aug 11 11:38:06 2018 +0900
+
+    batch sh fixed
+
+[33mcommit c4531d6ccaf7b37571f980cc530ee410c1d71795[m
+Author:  <tonyspark@DESKTOP-MNM0QGF.localdomain>
+Date:   Sat Aug 11 11:35:23 2018 +0900
+
+    batch csv
+
+[33mcommit 0a07c853c7694cf7e365601572d00425a54340f1[m
+Author:  <tonyspark@DESKTOP-MNM0QGF.localdomain>
+Date:   Thu Aug 9 09:34:57 2018 +0900
+
+    profile draganddrop fixed
+
+[33mcommit b6439fb1712645790b44e04674fd8b308b0a5037[m
+Author: eves <evesjapan@gmail.com>
+Date:   Thu Aug 9 09:34:11 2018 +0900
+
+    profile add
+
+[33mcommit 17a229fb8efdb15a5311f6fbf352097b476361ac[m
+Author:  <tonyspark@DESKTOP-MNM0QGF.localdomain>
+Date:   Mon Aug 6 14:04:24 2018 +0900
+
+    profile add
+
+[33mcommit 6aa62cca87ce434e081fe3a6eca5be7209047768[m
+Author:  <tonyspark@DESKTOP-MNM0QGF.localdomain>
+Date:   Sat Aug 4 22:48:18 2018 +0900
+
+    async await ready
+
+[33mcommit 74876a8fdf583ac274fe3ca141232e8f7a34e8e0[m
+Merge: 3084d91 4e4296b
+Author:  <tonyspark@DESKTOP-MNM0QGF.localdomain>
+Date:   Sat Aug 4 18:15:45 2018 +0900
+
+    pc index.html footer fixed
+
+[33mcommit 3084d918dc1733eee30cace18ee722641d067d4d[m
+Author:  <tonyspark@DESKTOP-MNM0QGF.localdomain>
+Date:   Sat Aug 4 18:14:16 2018 +0900
+
+    pc fixed index.html
+
+[33mcommit 4e4296b1beba89252d4c5cd7070e420e0e1471b9[m
+Author: 김용연 <toyongyeon@kimyongyeonui-MacBook-Air.local>
+Date:   Sat Aug 4 18:13:20 2018 +0900
+
+    index.html
+
+[33mcommit 013f8cd7928e89ab7b63c3d03fe58ef76ff474d6[m
+Author:  <tonyspark@DESKTOP-MNM0QGF.localdomain>
+Date:   Sat Aug 4 00:13:37 2018 +0900
+
+    css3 study
+
+[33mcommit fa39bec107b98cec3d575890be60596170ea4a8e[m
+Author:  <tonyspark@DESKTOP-MNM0QGF.localdomain>
+Date:   Thu Aug 2 19:47:43 2018 +0900
+
+    backend source upload
+
+[33mcommit d8f5321ff5b71c6c25aa841a70d0822234744252[m
+Author:  <tonyspark@DESKTOP-MNM0QGF.localdomain>
+Date:   Wed Aug 1 20:11:23 2018 +0900
+
+    src add files
+
+[33mcommit 2b7690c8f5ca4f6e0bd87a964dbee25849a08b15[m
+Author:  <tonyspark@DESKTOP-MNM0QGF.localdomain>
+Date:   Wed Aug 1 13:39:04 2018 +0900
+
+    document add
+
+[33mcommit e13e764dd0af745c92f65edbd4ae2c641496304c[m
+Author: kimyongyeon <toyongyeon@gmail.com>
+Date:   Wed Aug 1 13:26:02 2018 +0900
+
+    study up
+
+[33mcommit 4b30b828c8f70da0d2a160cc74d2199b33367c73[m
+Author: kimyongyeon <toyongyeon@gmail.com>
+Date:   Wed Aug 1 12:21:41 2018 +0900
+
+    react 소개
+
+[33mcommit e2c06c675efbed133aaaebc19aee0363b883de18[m
+Author:  <tonyspark@DESKTOP-MNM0QGF.localdomain>
+Date:   Wed Aug 1 10:46:30 2018 +0900
+
+    react parcel study
+
+[33mcommit 55f5e8569932b555032a717e77ceb5a570cb9a9e[m
+Author:  <tonyspark@DESKTOP-MNM0QGF.localdomain>
+Date:   Tue Jul 31 08:14:08 2018 +0900
+
+    index.html, index.js, readme.md, .gitignore editing
+
+[33mcommit c070b60c1ccaa642a9cbbc6768b0cba2a2735917[m
+Merge: 6ee2394 85b0f60
+Author:  <tonyspark@DESKTOP-MNM0QGF.localdomain>
+Date:   Tue Jul 31 07:25:30 2018 +0900
+
+    Merge branch 'dev' of github.com:kimyongyeon/sat_study into dev
+
+[33mcommit 6ee2394d857864b6a0fb72af04d100430507d241[m
+Author: eves <evesjapan@gmail.com>
+Date:   Tue Jul 31 07:24:02 2018 +0900
+
+    home.js
+
+[33mcommit 85b0f60a347e8af777c91845010010387342591f[m
+Author: kimyongyeon <toyongyeon@gmail.com>
+Date:   Tue Jul 31 07:22:15 2018 +0900
+
+    index.html, index.js develop edit fixed
+
+[33mcommit 24c60163bd1730c2fcad814af889e79eed0e8025[m
+Author:  <tonyspark@DESKTOP-MNM0QGF.localdomain>
+Date:   Sun Jul 29 12:06:39 2018 +0900
+
+    readme
+
+[33mcommit 10afff0b1f9722921ffba058d8caa223c86dea2a[m
+Author:  <tonyspark@DESKTOP-MNM0QGF.localdomain>
+Date:   Sun Jul 29 12:03:12 2018 +0900
+
+    file add
+
+[33mcommit 3fadde5a632e4ff5537281b46ae3cd1c242d6424[m
+Merge: 200ecab c378e7b
+Author:  <tonyspark@DESKTOP-MNM0QGF.localdomain>
+Date:   Sun Jul 29 10:21:06 2018 +0900
+
+    해결
+
+[33mcommit 200ecab842c35eeee96da94f056543185074c33a[m
+Author:  <tonyspark@DESKTOP-MNM0QGF.localdomain>
+Date:   Sun Jul 29 10:19:13 2018 +0900
+
+    이거 제대로 오류다.
+
+[33mcommit c378e7baef5114dca6ee67a74ff8cf669547aa3a[m
+Author:  <tonyspark@DESKTOP-MNM0QGF.localdomain>
+Date:   Sun Jul 29 10:18:43 2018 +0900
+
+    commit
+
+[33mcommit 7568e5d4549de20e41aeb5fe52c524aa439d7d83[m
+Merge: 2f685ec 88abe25
+Author:  <tonyspark@DESKTOP-MNM0QGF.localdomain>
+Date:   Sun Jul 29 10:14:53 2018 +0900
+
+    Merge branch 'dev' of github.com:kimyongyeon/sat_study into dev
+
+[33mcommit 2f685ecaec4fad024c6ec1c5358e32b7f8681269[m
+Author: eves <evesjapan@gmail.com>
+Date:   Sun Jul 29 10:13:51 2018 +0900
+
+    readme.md
+
+[33mcommit 88abe256c9ff6dadccbc7c8000c3ab3fd7daa492[m
+Author: kimyongyeon <toyongyeon@gmail.com>
+Date:   Sat Jul 28 15:23:30 2018 +0900
+
+    eslint msg
+
+[33mcommit 9555cde0b263a7c97076c3ea623b03e195b52eae[m
+Author: kimyongyeon <toyongyeon@gmail.com>
+Date:   Sat Jul 28 15:19:30 2018 +0900
+
+    msg edit
+
+[33mcommit d17fa2c20ee8803d75a45c5c4b2001e606c2f1ee[m
+Author: kimyongyeon <toyongyeon@gmail.com>
+Date:   Fri Jul 27 08:06:22 2018 +0900
+
+    styled add
+
+[33mcommit e61fd3298cef74a233c92dd0d3882c3d3b32250b[m
+Author: kimyongyeon <toyongyeon@gmail.com>
+Date:   Fri Jul 27 08:03:14 2018 +0900
+
+    commit study
+
+[33mcommit 1b4ab9b4b089e1b0cf8e3194ea0c435eb629d615[m
+Author: kimyongyeon <toyongyeon@gmail.com>
+Date:   Fri Jul 27 07:59:04 2018 +0900
+
+    evernore add
+
+[33mcommit ab15e54f32dba00ef9fa4ca805a5507409cc9291[m
+Merge: f16d417 b58f145
+Author: kimyongyeon <toyongyeon@gmail.com>
+Date:   Fri Jul 27 07:54:31 2018 +0900
+
+    Merge branch 'dev' of github.com:kimyongyeon/sat_study into dev
+
+[33mcommit f16d41756e87aff1548ef14318e6debf1db82d40[m
+Author: kimyongyeon <toyongyeon@gmail.com>
+Date:   Fri Jul 27 07:54:06 2018 +0900
+
+    vimrc add
+
+[33mcommit b58f145b0a9c9b12f10c9c241d1db1f918964d15[m
+Author: 김용연 <toyongyeon@kimyongyeonui-MacBook-Air.local>
+Date:   Thu Jul 26 20:30:21 2018 +0900
+
+    written
+
+[33mcommit e95d0ab5ae45c183f8ccac0b587910d8637da0c4[m
+Author: 김용연 <toyongyeon@kimyongyeonui-MacBook-Air.local>
+Date:   Thu Jul 26 20:28:07 2018 +0900
+
+    app.js edit
+
+[33mcommit 525c85bf6f30d910bd73d05aafa4cb3b258d885a[m
+Merge: d2ca3ca 5808b08
+Author: kimyongyeon <toyongyeon@gmail.com>
+Date:   Thu Jul 26 20:19:40 2018 +0900
+
+    commit merge
+
+[33mcommit d2ca3ca4cd5a92415c30f2b4db64a937f0d85ea6[m
+Author: kimyongyeon <toyongyeon@gmail.com>
+Date:   Thu Jul 26 20:18:47 2018 +0900
+
+    commit padding
+
+[33mcommit 5808b082b07b2926c5b438409fff1b7b21c0bd0f[m
+Author: kimyongyeon <toyongyeon@gmail.com>
+Date:   Thu Jul 26 20:18:14 2018 +0900
+
+    commit test
+
+[33mcommit eb6d7ea81caba6fb12daf36ab18ebca442510a66[m
+Author: kimyongyeon <toyongyeon@gmail.com>
+Date:   Thu Jul 26 20:16:23 2018 +0900
+
+    td attribute edit
+
+[33mcommit c183b2976a0e07ff37161017ed24601c2ce6e9c0[m
+Author: kimyongyeon <toyongyeon@gmail.com>
+Date:   Thu Jul 26 20:07:14 2018 +0900
+
+    index.html
+
+[33mcommit 3ae3fe08f381fb751ce0c95a3f2e67c4acdc09cf[m
+Author: kimyongyeon <toyongyeon@gmail.com>
+Date:   Thu Jul 26 20:01:58 2018 +0900
+
+    merge
+
+[33mcommit 5c9dc294d02129d8682f380e51d8b1a55a605dc7[m
+Merge: 3050963 e53d200
+Author: kimyongyeon <toyongyeon@gmail.com>
+Date:   Thu Jul 26 20:00:06 2018 +0900
+
+    Merge branch 'st'
+    X
+
+[33mcommit e53d2004e4de05522664e19a8c4572d67d7eab92[m
+Author: kimyongyeon <toyongyeon@gmail.com>
+Date:   Thu Jul 26 19:54:37 2018 +0900
+
+    12312312#
+
+[33mcommit 3050963cba5cd60aa21c8e2d536cacc8b34c86cb[m
+Author: kimyongyeon <toyongyeon@gmail.com>
+Date:   Thu Jul 26 19:54:15 2018 +0900
+
+    master
+
+[33mcommit 7b05ec5be01f37ac28ed833070fe99d06adbff58[m
+Merge: 7b7e090 c46d0f0
+Author: kimyongyeon <toyongyeon@gmail.com>
+Date:   Thu Jul 26 19:52:58 2018 +0900
+
+    XMerge branch 'st'
+
+[33mcommit c46d0f0847c271314d78f52912a147502bd0a752[m
+Author: kimyongyeon <toyongyeon@gmail.com>
+Date:   Thu Jul 26 19:52:45 2018 +0900
+
+    1312312
+
+[33mcommit 7b7e090ba36a1e9f7ce617779e70d22c15692efc[m
+Merge: 73e3ec5 49affd2
+Author: kimyongyeon <toyongyeon@gmail.com>
+Date:   Thu Jul 26 19:52:21 2018 +0900
+
+    app.js
+
+[33mcommit 49affd2458a2359bd34bf4a068176b2a58b8f417[m
+Author: kimyongyeon <toyongyeon@gmail.com>
+Date:   Thu Jul 26 19:50:47 2018 +0900
+
+    test
+
+[33mcommit 73e3ec57365f2931fc471f087e05d526f5217673[m
+Author: kimyongyeon <toyongyeon@gmail.com>
+Date:   Thu Jul 26 19:48:14 2018 +0900
+
+    background: black
+
+[33mcommit ae046e74c93f19bc3044d1158b2a3ec6c1a855a4[m
+Merge: 21e2f4b 4ba6013
+Author: kimyongyeon <toyongyeon@gmail.com>
+Date:   Thu Jul 26 19:43:54 2018 +0900
+
+    merge
+
+[33mcommit 21e2f4bbff6a8629fe6e242f531fe24daf213d36[m
+Author: kimyongyeon <toyongyeon@gmail.com>
+Date:   Thu Jul 26 19:40:31 2018 +0900
+
+    master index.html edit
+
+[33mcommit 4ba6013dc20cbd5c9c36e45836febbe924a64a65[m
+Author: kimyongyeon <toyongyeon@gmail.com>
+Date:   Thu Jul 26 19:39:08 2018 +0900
+
+    index.html edit
+
+[33mcommit c9133ed572670972ee0a988777e9f98059cbb2f1[m
+Merge: a0171d7 335f267
+Author: 김용연 <toyongyeon@kimyongyeonui-MacBook-Air.local>
+Date:   Tue Jul 24 21:19:37 2018 +0900
+
+    index.js remove
+
+[33mcommit a0171d7a26bd256d9d5922680dfe78c8801e2da8[m
+Merge: 5fdae27 abb164f
+Author: 김용연 <toyongyeon@kimyongyeonui-MacBook-Air.local>
+Date:   Tue Jul 24 21:18:49 2018 +0900
+
+    index.js
+
+[33mcommit 335f26775cdcfaa222a40e67a88bc01f91ccfd4c[m
+Author: 김용연 <toyongyeon@kimyongyeonui-MacBook-Air.local>
+Date:   Tue Jul 24 21:16:49 2018 +0900
+
+    index edit
+
+[33mcommit 392971dcb3367c62594dc57c945fe0daf7ba4e76[m
+Merge: 5fdae27 abb164f
+Author: 김용연 <toyongyeon@kimyongyeonui-MacBook-Air.local>
+Date:   Tue Jul 24 21:15:15 2018 +0900
+
+    index.js merge
+
+[33mcommit 5fdae27d171d15e713f7655286ff84ffdb9741b5[m
+Author: 김용연 <toyongyeon@kimyongyeonui-MacBook-Air.local>
+Date:   Tue Jul 24 21:02:02 2018 +0900
+
+    overwritten
+
+[33mcommit abb164f71a66b7f3e05dab07cfd04f9c6e6ce2e3[m
+Author: tonyspark <toyongyeon@gmail.com>
+Date:   Tue Jul 24 20:51:11 2018 +0900
+
+    Update index.js
+
+[33mcommit da098e1da33fa3d2647c8d9fc675b3c4a7219010[m
+Author: 김용연 <toyongyeon@kimyongyeonui-MacBook-Air.local>
+Date:   Tue Jul 24 20:49:58 2018 +0900
+
+    index.js fixed
+
+[33mcommit 2276fdc09efc6dd27adc7ff830c4dd6917a78002[m
+Author: 김용연 <toyongyeon@kimyongyeonui-MacBook-Air.local>
+Date:   Sun Jul 22 18:08:43 2018 +0900
+
+    table insert study
+
+[33mcommit 11b9fc0e6749b0910eac23eacfedcdd7574a8e90[m
+Author: 김용연 <toyongyeon@kimyongyeonui-MacBook-Air.local>
+Date:   Sat Jul 21 16:46:59 2018 +0900
+
+    first commit
+
+[33mcommit 6378b47cca9ff26fea53267b4c19bebfa2828401[m
+Author: tonyspark <toyongyeon@gmail.com>
+Date:   Sat Jul 21 16:35:26 2018 +0900
+
+    Initial commit
