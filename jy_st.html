@@ -17,20 +17,31 @@
 
         table tbody tr td label {
             display: block;
+            cursor: pointer;
+        }
+
+        table tbody tr:hover {
+            background: red;
+        }
+        #myForm div {
+            margin-top: 5px;
         }
     </style>
 </head>
 <body>
     <!-- 입력폼 -->
-    <form action="">
+    <form action="" id="myForm">
         <input id="input_name" type="text" placeholder="이름 ">
         <input id="input_sex" type="text" placeholder="성별 ">
         <input id="input_age" type="text" placeholder="나이 ">
-        <input id="btn_save" type="button" value="저장">
-        <input id="btn_add" type="button" value="추가">
-        <input id="btn_edit" type="button" value="수정">
-        <input id="btn_remove" type="button" value="삭제">
-        <input id="btn_cancel" type="button" value="취소">
+        <div>
+            <input id="btn_add" type="button" value="추가">
+            <input id="btn_edit" type="button" value="수정">
+            <input id="btn_remove" type="button" value="삭제">
+            <input id="btn_save" type="button" value="브라우저저장">
+            <input id="btn_cancel" type="button" value="브라우저저장취소">
+            <input id="btn_send" type="button" value="서버전송">
+        </div>
     </form>
     <table id="tbl_member_list" >
         <colgroup>
@@ -92,6 +103,15 @@
             }
             this.read = function(key) {
                 return localStorage.getItem(key);
+            }
+            this.oneRead = function(key) {
+                var seq = key.split("_")[1];
+                // console.log("seq: ", seq);
+                var list = JSON.parse(this.read("members"));
+                // console.log(list);
+                return list.filter(i => {
+                    return i.seq == seq;
+                });
             }
             this.delete = function(key) {
                 try {
@@ -222,17 +242,43 @@
                 $("#tbl_member_list tbody").append(trHtml);
 
             }
+
+            function drawInput(item) {
+                $("#input_name").val(item.name);
+                $("#input_sex").val(item.sex);
+                $("#input_age").val(item.age);
+            }
             
             // 과제: 8/18 구현을 못해도 되나 생각은 해봐라 어떻게 해야 할지?
             function fnEdit() {
                 // 1. 배열중에 유일한 key를 잡아야 함.
                 // 2. 키값으로 배열중에서 값을 찾아야 함.
                 // 3. 화면에 표시를 해야 함.
+                var inputCheck = $("input[type=checkbox]:checked");
+                var checked = inputCheck.length;
+                if (checked > 1) {
+                    alert("하나 이상은 선택 할 수 없습니다.");
+                } else {
+                    if (checked == 0) {
+                        alert("선택한 컬럼이 없습니다.");
+                    } else {
+                        // 여기서 선택한 로우에 대한 컬럼 값을 뽑아서 데이터을 수정한다.
+                        var id = inputCheck.attr("id");
+                        // console.log(id);
+                        var item = memberDao.oneRead(id)[0];   
+                        console.log(item);
+                        drawInput(item);
+                    }
+                }
             }
             // 과제: 8/18 구현을 못해도 되나 생각은 해봐라 어떻게 해야 할지?
             function fnRemove() {
-
+               
             }
+
+            $("#btn_edit").on("click", (e) => {
+                fnEdit();
+            });
 
             // 저장 
             $("#btn_save").on("click", function() {
