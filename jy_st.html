@@ -87,6 +87,8 @@
                 age: ''
             };
             this.members = [];
+            this.state = ""; // C,R,U,D
+            this.seq = "";
         }
         // -----------------------------------------
         // DAO : 데이터 엑세스 레이어 
@@ -141,10 +143,23 @@
 
             fnInit ();
 
+            function enbleInput() {
+                $("#input_name").attr("readOnly", false);
+                $("#input_sex").attr("readOnly", false);
+                $("#input_age").attr("readOnly", false);
+            }
+            
+            function disableInput() {
+                $("#input_name").attr("readOnly", true);
+                $("#input_sex").attr("readOnly", true);
+                $("#input_age").attr("readOnly", true);
+            }
+
             function fnInit () {
                 // 회원정보 읽기
                 memberVO.members = JSON.parse(memberDao.read("members"));
                 drawTable();
+                disableInput();
             }
 
             // 회원정보 추가 
@@ -169,15 +184,20 @@
             }
 
             // 컨트롤러 
-            function fnController () {
-                addData();
+            function fnController (state) {
+                if (state === "C") {
+                    memberVO.state = "C";
+                } else {
+                    memberVO.state = "U";
+                }
+                memberDataProc(state); // 신규 추가 
                 drawTable();
             }
 
             //alert(1);
 
-            // 회원정보 입력 
-            function addData () {
+            // 회원정보 입력 / 수정 
+            function memberDataProc (state) {
                 var $name = $("#input_name").val();
                 var $sex = $("#input_sex").val();
                 var $age = $("#input_age").val();
@@ -194,9 +214,14 @@
                     }
                     return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
                 }
-
+                
                 memberVO.member = {};
-                memberVO.member.seq = guid();
+                if (state === 'C') { // 신규 
+                    memberVO.member.seq = guid();
+                } else { // 업데이트 
+                    memberVO.member.seq = memberVO.seq;
+                }
+                
                 memberVO.member.name = $name;
                 memberVO.member.sex = $sex;
                 memberVO.member.age = $age;
@@ -204,9 +229,9 @@
                 var result = fnAddMember(memberVO.member);
                 console.log("memberLength=", result); // 회원정보 개수 
                 if (result > 0) {
-                    console.log("push success!");
+                    console.log(`${$seq} push success!`);
                 } else {
-                    console.log("push fail!");
+                    console.log(`${$seq} push fail!`);
                 }
                 // var memberLength = fnAddMember(member);
                 // console.log("memberLength=", memberLength); // 길이 
@@ -266,6 +291,7 @@
                         var id = inputCheck.attr("id");
                         // console.log(id);
                         var item = memberDao.oneRead(id)[0];   
+                        memberVO.seq = item.seq;
                         console.log(item);
                         drawInput(item);
                     }
@@ -273,26 +299,44 @@
             }
             // 과제: 8/18 구현을 못해도 되나 생각은 해봐라 어떻게 해야 할지?
             function fnRemove() {
-               
+                memberVO.state="D";
             }
 
             $("#btn_edit").on("click", (e) => {
+                memberVO.state="U";
+                enbleInput(); // input enabled 
                 fnEdit();
             });
 
             // 저장 
             $("#btn_save").on("click", function() {
+
+                var state = memberVO.state;
+                // seq가 존재하면 기존의 값을 변경.
+                if (state === "C") { // 신규추기 
+                    fnController("C");
+                } else { // 수정 
+                    fnController("U")
+                }
+
                 var result = memberDao.save("members", JSON.stringify(memberVO.members));
                 if (result > 0) {
                     console.log("db save success, " + JSON.stringify(memberVO.members));
                 } else {
                     console.log("db save fail");
                 }
+                
+                disableInput();
+            });
+
+            $("#btn_cancel").on("click", (e) => {
+                disableInput();
             });
 
             // 추가 
             $("#btn_add").on("click", function() {
-                fnController();
+                memberVO.state="C";
+                enbleInput();
             });
 
             // 객체지향 스타일로 한번변형 생각 ?????? [hint: object(객체)]
@@ -302,10 +346,7 @@
                     self.app(self);
                 },
                 app: (self) => {
-
-
                     console.log(self);
-                    
                     // 업무 로직
                     var list = self.dao.select({});
                     var member = self.member;
