@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Dom Study</title>
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script src="node_modules/lodash/lodash.js"></script>
+</head>
+<body>
+    <div id="p-name"><h1>DOM 세상에 오신걸 환영합니다.</h1></div>
+    <ul id="name-list">
+    </ul>
+    <input type="text" placeholder="아이디">
+    <button onclick="btnLogin();">로그인</button>
+    <h2>아이디 목록 </h2>
+    <ul id="userIdList">
+    </ul>
+    <script>
+        // 입력/출력 
+        var names=['이지영', '이지영1', '이지영3', '이지영'];
+        var idList = ['KIMYONG', 'TONY']; // db 
+        // input < kimyong < success < alert("성공 ");
+        getIdList();
+        function getIdList() {
+            var htmlLi = "";
+            for (var i=0; i<idList.length; i++) {
+                htmlLi += `
+                    <li><a href="#">${idList[i]}</a></li>
+                `
+            }
+            $("#userIdList").append(htmlLi);
+        }
+
+        function btnLogin() {
+            alert("btnLogin called");
+        }
+        $("button").click((e) => {
+            // ``
+            // `${변수명}`
+            // `${$text}`
+        })
+        $("button").click(function(e) {
+        });
+        $("button").on("click", function(e) {
+        });
+        $("button").on("click", (e) => {
+             // 1. ID LIST 읽는다. 
+             // 2. ID LIST를 LOOP로 돌린다.
+             // 3. 받은 ID와 ID LIST값을 비교 한다. 
+             // 4. 성공하면 "성공 출력"
+             // 5. 실패하면 "실패 출력"
+             // 6. 어플 종료
+            var $name = _.toUpper($("input").val());
+            //  alert($name);
+            var successStat = false;
+            for(var i=0; i<idList.length; i++) {
+                if ($name == idList[i]) {
+                    successStat = true;
+                    break;
+                }
+            }
+            if (successStat) {
+                alert("아이디가 존재합니다.");
+            } else {
+                alert("로그인 할 수 없습니다.");
+            }
+        })
+
+        var liTag = "";
+        $("#name-list").empty();
+        // $("#name-list").prepend("for ...");
+        // var cnt = 0;
+        // var newNames = [];
+        // for(var i=0; i<names.length; i++) {
+        //     if ("이지영" == names[i]) {
+        //         newNames.push(names[i]);
+        //         cnt++;
+        //         // liTag += `<li>${names[i]}</li>`;
+        //     }
+        //     if (cnt == 2) {
+        //         newNames = newNames.slice(0, -1);
+        //     }
+        // }
+        // console.log(newNames);
+        // $("#name-list").append(liTag);
+        // $("#name-list").append("========================");
+        // $("#name-list").prepend("map...");
+        var liTag2 = "";
+        names = names.filter(nm => {
+            return "이지영" == nm; 
+        });
+        names = _.union(names);
+        names
+        .map(name => {
+            console.log(name);
+            liTag2 += `<li>${name} 열심히 하자</li>`;
+        });
+        $("#name-list").append(liTag2);
+        // 출력 방법
+        // var popup = $("#p-name").text(); // 텍스트만 뽑아 오는거
+        // alert(popup);
+        var popup = $("#p-name"); // 텍스트만 뽑아 오는거
+        console.dir(popup);
+
+        console.log(_.lowerCase("KKJKLajklsjkfl"));
+
+
+
+        // alert(popup);
+        // var popup = $("#p-name").append();
+        // 입력하는 방법
+        // $("#p-name").text("p language test"); // 문자열만 삭제되고 재입력
+        // $("#p-name").text("<h1>hi helo </h1>"); // 문자열만 삭제되고 재입력
+        // $("#p-name").append("p lang"); // 추가 
+        // $("#p-name").html("<h1>hello p</h1>"); // 기존 문자열을 지우고 새로운 내용으로 바뀜
+        // $("#p-name").html("p hi~"); // 기존 문자열을 지우고 새로운 내용으로 바뀜
+    </script>
+</body>
+</html>

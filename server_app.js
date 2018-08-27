@@ -5,6 +5,12 @@ app.get('/', function (req, res) {
   res.send('Hello World!');
 });
 
+app.get("/idList", (req, res) => {
+  res.send({
+    names: ["Ksdfsfsd", "Ysdfsdf", "Ysdfsdf"]    
+  })
+})
+
 app.listen(3000, function () {
   console.log('Example app listening on port 3000!');
 });

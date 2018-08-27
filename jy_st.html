@@ -157,9 +157,9 @@
 
             function fnInit () {
                 // 회원정보 읽기
-                memberVO.members = JSON.parse(memberDao.read("members"));
-                drawTable();
-                disableInput();
+                // memberVO.members = JSON.parse(memberDao.read("members"));
+                // drawTable();
+                // disableInput();
             }
 
             // 회원정보 추가 
@@ -228,6 +228,7 @@
                 console.log(`member=${JSON.stringify(memberVO.member)}`);
                 var result = fnAddMember(memberVO.member);
                 console.log("memberLength=", result); // 회원정보 개수 
+                var $seq = memberVO.member.seq;
                 if (result > 0) {
                     console.log(`${$seq} push success!`);
                 } else {
@@ -241,27 +242,28 @@
             function drawTable() {
                 $("#tbl_member_list tbody").empty(); // 초기화 
                 var trHtml = "";
-                // var memLen = memberVO.members.length;
-                // for (var i=0; i<memLen; i++) {
-                //     var m = memberVO.members[i];
-                //     trHtml += `
-                //         <tr>
-                //             <td>${m.name}</td>
-                //             <td>${m.sex}</td>
-                //             <td>${m.age}</td>
-                //         </tr>
-                //     `;
-                // }
-                memberVO.members.map(i => {
+                var memLen = memberVO.members.length;
+                for (var i=0; i<memLen; i++) {
+                    var m = memberVO.members[i];
                     trHtml += `
                         <tr>
-                            <td><label for="chk_${i.seq}"><input id="chk_${i.seq}" type="checkbox"></label></td>
-                            <td>${i.name}</td>
-                            <td>${i.sex}</td>
-                            <td>${i.age}</td>
+                            <td><input id="memberSeq_${m.seq}" type=checkbox></td>
+                            <td>${m.name}</td>
+                            <td>${m.sex}</td>
+                            <td>${m.age}</td>
                         </tr>
                     `;
-                });
+                }
+                // memberVO.members.map(i => {
+                //     trHtml += `
+                //         <tr>
+                //             <td><label for="chk_${i.seq}"><input id="chk_${i.seq}" type="checkbox"></label></td>
+                //             <td>${i.name}</td>
+                //             <td>${i.sex}</td>
+                //             <td>${i.age}</td>
+                //         </tr>
+                //     `;
+                // });
                 // this.members => loop(for, for in, map) 
                 // 과제: 8/18 append 
                 $("#tbl_member_list tbody").append(trHtml);
@@ -289,8 +291,11 @@
                     } else {
                         // 여기서 선택한 로우에 대한 컬럼 값을 뽑아서 데이터을 수정한다.
                         var id = inputCheck.attr("id");
-                        // console.log(id);
-                        var item = memberDao.oneRead(id)[0];   
+                        console.log(id);
+                        var item = memberDao.oneRead(id)[0] || {};   
+                        if (item == {} ) {
+                            
+                        }
                         memberVO.seq = item.seq;
                         console.log(item);
                         drawInput(item);
