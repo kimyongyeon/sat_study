@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="HellowSample" default="default">
+    <description>description</description>
+    <property name="HelloText" value="Hello"/>
+    <property name="WorldText" value="World"/>
+	<property name="svnname" value="svn build test"/>
+ 
+    <target name="default" depends="depends" description="description">
+        <echo>${HelloText}</echo>
+    </target>
+ 
+    <!-- target: depends -->
+    <target name="depends">
+        <echo>${WorldText}</echo>
+    </target>
+
+	<target name="svn-csrtag">
+	    <echo>${svnname}</echo>
+		<exec dir="C:\\Users\\Administrator\\Documents\\prj\\" executable="python" failonerror="true">
+			<arg value="file_folder_create.py" />
+			<arg value="CSRTAG" />
+		</exec>
+	</target>
+</project>
